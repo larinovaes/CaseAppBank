@@ -1,3 +1,15 @@
 <resources>
+    <!-- INITIAL -->
     <string name="app_name">itau-case-bank</string>
+    <string name="init_screen_button">INICIAR</string>
+    <string name="init_screen_title">Itaú Transfer</string>
+    <string name="init_screen_subtitle">Bem-vindo ao Itaú Transfer!</string>
+    <string name="init_screen_content_description_button">Iniciar sessão </string>
+    <string name="init_screen_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum ultricies sit nulla etiam sagittis </string>
+    <string name="init_screen_content_description_logo">Logo itaú</string>
+
+    <!-- LOGIN -->
+    <string name="login_screen_title">Login</string>
+    <string name="login_screen_subtitle">Bem-vindo ao Itaú Transfer</string>
+
 </resources>
