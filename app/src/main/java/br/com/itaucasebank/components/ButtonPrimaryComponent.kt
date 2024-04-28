@@ -27,7 +27,7 @@ import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
-fun ButtonPrimary(
+fun ButtonPrimaryComponent(
     text: String,
     @DrawableRes icon: Int? = null,
     onClicked: () -> Unit
@@ -74,7 +74,7 @@ fun ButtonPrimary(
 @Composable
 private fun ButtonPreview() {
     ItaucasebankTheme {
-        ButtonPrimary(
+        ButtonPrimaryComponent(
             text = "TEXT",
             icon = R.drawable.ic_arrow,
             onClicked = { }

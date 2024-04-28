@@ -23,11 +23,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.itaucasebank.R
-import br.com.itaucasebank.components.ButtonPrimary
+import br.com.itaucasebank.components.ButtonPrimaryComponent
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
-import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.LightGray
 
 @Composable
 fun InitialScreen(
@@ -54,7 +54,7 @@ private fun InitialScreen(
         Spacer(modifier = Modifier.height(34.dp))
         InitialContent()
         Spacer(modifier = Modifier.height(24.dp))
-        ButtonPrimary(
+        ButtonPrimaryComponent(
             text = stringResource(id = R.string.init_screen_button),
             icon = R.drawable.ic_arrow,
             onClicked = onButtonAccessClicked
@@ -94,7 +94,7 @@ private fun InitialContent() {
 
     Text(
         text = stringResource(id = R.string.init_screen_text),
-        color = Cinza,
+        color = LightGray,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(horizontal = 24.dp),
     )

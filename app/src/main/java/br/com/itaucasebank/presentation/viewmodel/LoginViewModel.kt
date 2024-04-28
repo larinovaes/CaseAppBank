@@ -1,4 +1,4 @@
-package br.com.itaucasebank.presentation
+package br.com.itaucasebank.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

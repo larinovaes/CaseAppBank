@@ -10,8 +10,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import br.com.itaucasebank.presentation.screens.ExtractScreen
+import br.com.itaucasebank.presentation.screens.HomeScreen
 import br.com.itaucasebank.presentation.screens.InitialScreen
 import br.com.itaucasebank.presentation.screens.LoginScreen
+import br.com.itaucasebank.presentation.screens.TransferAreaScreen
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 
@@ -30,6 +33,15 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(Route.LOGIN.name) {
                         LoginScreen(navController)
+                    }
+                    composable(Route.HOME.name) {
+                        HomeScreen(navController)
+                    }
+                    composable(Route.EXTRACT.name) {
+                        ExtractScreen(navController = navController)
+                    }
+                    composable(Route.TRANSFER_AREA.name) {
+                        TransferAreaScreen(navController = navController)
                     }
                 }
             }

@@ -12,16 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
 import androidx.compose.material.Text
-import androidx.compose.material.TextButton
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -43,8 +40,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
-import br.com.itaucasebank.components.ButtonPrimary
-import br.com.itaucasebank.presentation.LoginViewModel
+import br.com.itaucasebank.components.ButtonPrimaryComponent
+import br.com.itaucasebank.presentation.viewmodel.LoginViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Black
 import br.com.itaucasebank.ui.theme.ColorDivider
@@ -93,7 +90,7 @@ private fun LoginScreen(
             onPasswordChanged = onPasswordChanged
         )
         Spacer(modifier = Modifier.height(150.dp))
-        ButtonPrimary(
+        ButtonPrimaryComponent(
             text = stringResource(id = R.string.login_screen_title),
             icon = null,
             onClicked = onButtonAccessClicked
@@ -111,21 +108,21 @@ private fun TitleAndSubtitle() {
             .padding(top = 150.dp)
     ) {
         Text(
+            modifier = Modifier
+                .padding(horizontal = 34.dp),
             text = stringResource(id = R.string.login_screen_title),
             style = MaterialTheme.typography.h5,
             color = Black,
             fontWeight = FontWeight.Bold,
             minLines = 1,
-            modifier = Modifier
-                .padding(horizontal = 34.dp),
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(
+            modifier = Modifier
+                .padding(horizontal = 34.dp),
             text = stringResource(id = R.string.login_screen_subtitle),
             color = Color.Gray,
             minLines = 1,
-            modifier = Modifier
-                .padding(horizontal = 34.dp),
         )
     }
 }
@@ -240,10 +237,12 @@ private fun RegisterButton(onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ){
-        Text(text = "Não tem uma conta? ", color = ColorInput)
+        Text(text = stringResource(id = R.string.login_screen_text_register), color = ColorInput)
         Text(
-            modifier = Modifier.clickable { onClick() },
-            text = "Cadastre-se",
+            modifier = Modifier
+                .clickable { onClick() }
+                .padding(start = 4.dp),
+            text = stringResource(id = R.string.login_screen_button_register),
             color = Color.Black,
             fontWeight = FontWeight.Bold,
         )

@@ -5,4 +5,6 @@ enum class Route {
     INITIAL,
     LOGIN,
     HOME,
+    TRANSFER_AREA,
+    EXTRACT
 }
