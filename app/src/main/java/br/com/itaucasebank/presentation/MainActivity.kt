@@ -15,6 +15,8 @@ import br.com.itaucasebank.presentation.screens.HomeScreen
 import br.com.itaucasebank.presentation.screens.InitialScreen
 import br.com.itaucasebank.presentation.screens.LoginScreen
 import br.com.itaucasebank.presentation.screens.TransferAreaScreen
+import br.com.itaucasebank.presentation.screens.TransferConfirmationScreen
+import br.com.itaucasebank.presentation.screens.TransferReceiptScreen
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 
@@ -42,6 +44,12 @@ class MainActivity : ComponentActivity() {
                     }
                     composable(Route.TRANSFER_AREA.name) {
                         TransferAreaScreen(navController = navController)
+                    }
+                    composable(Route.TRANSFER_CONFIRMATION.name) {
+                        TransferConfirmationScreen(navController = navController)
+                    }
+                    composable(Route.TRANSFER_RECEIPT.name) {
+                        TransferReceiptScreen(navController = navController)
                     }
                 }
             }

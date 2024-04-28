@@ -6,5 +6,7 @@ enum class Route {
     LOGIN,
     HOME,
     TRANSFER_AREA,
-    EXTRACT
+    TRANSFER_CONFIRMATION,
+    TRANSFER_RECEIPT,
+    EXTRACT,
 }

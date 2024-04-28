@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
+import androidx.compose.material.CheckboxDefaults
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.LocalMinimumInteractiveComponentEnforcement
 import androidx.compose.material.Text
@@ -44,6 +45,7 @@ import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.enums.BankType
 import br.com.itaucasebank.enums.TransactionType
 import br.com.itaucasebank.presentation.model.ContactModel
+import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import br.com.itaucasebank.ui.theme.Purple40
@@ -52,8 +54,15 @@ import br.com.itaucasebank.ui.theme.Purple40
 fun TransferAreaScreen(
     navController: NavController,
 ) {
+    val contactModels = listOf(
+        ContactModel(
+            id = "1",
+            profileImageUrl = "https://media.licdn.com/dms/image/D4D03AQEIBryHBC4dKw/profile-displayphoto-shrink_400_400/0/1696031035294?e=1720051200&v=beta&t=fqLQ--hMjKeYcrIGUKn_TYmMsTbFh_eQcbugRY-cqos",
+            name = "Larissa",
+        )
+    )
     TransferAreaScreen(
-        contactModels = emptyList(), // todo: Recuperar da ViewModel
+        contactModels = contactModels, // todo: Recuperar da ViewModel
         accountInputTextValue = "", // todo: Recuperar da ViewModel
         recipientInputTextValue = "", // todo: Recuperar da ViewModel
         recipientCpfInputTextValue = "", // todo: Recuperar da ViewModel
@@ -68,7 +77,7 @@ fun TransferAreaScreen(
         onContactClick = {},
         onSelectedBankType = {}, // todo: Chamar ViewModel
         onSelectedTransferType = {}, // todo: Chamar ViewModel
-        onNextClick = {},
+        onNextClick = { navController.navigate(Route.TRANSFER_CONFIRMATION.name) },
     )
 }
 
@@ -84,7 +93,7 @@ private fun TransferAreaScreen(
     selectedTransferType: TransactionType?,
     isSaveContactChecked: Boolean,
     onSaveContactCheckedChange: (Boolean) -> Unit,
-    onBackClick: () -> Unit = {},
+    onBackClick: () -> Unit,
     onAddNewContactClick: () -> Unit,
     onContactClick: () -> Unit,
     onSelectedBankType: (BankType) -> Unit,
@@ -338,6 +347,9 @@ private fun SaveContactCheckBox(
             Checkbox(
                 checked = isSaveContactChecked,
                 onCheckedChange = onSaveContactCheckedChange,
+                colors = CheckboxDefaults.colors(
+                    checkedColor = Purple40,
+                )
             )
         }
         Text(
@@ -384,7 +396,7 @@ private fun TransferAreaPreview() {
             messageInputTextValue = "Pagamento do Jantar ",
             selectedBankType = selectedBankType.value,
             selectedTransferType = selectedTransferType.value,
-            isSaveContactChecked = false,
+            isSaveContactChecked = true,
             onSaveContactCheckedChange = {},
             onBackClick = {},
             onAddNewContactClick = {},
