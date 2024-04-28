@@ -20,7 +20,7 @@
     <string name="home_screen_text_statement_button">Ver Extrato</string>
     <string name="home_screen_text_balance">saldo na conta</string>
 
-    <!-- Stratum -->
+    <!-- Extract -->
     <string name="extract_screen_title_toolbar">Extrato</string>
     <string name="extract_screen_text_value">Valor</string>
     <string name="extract_screen_text_date_time">Data e Hora</string>
@@ -34,4 +34,10 @@
     <string name="transfer_area_screen_title_account_session">Contatos recentes</string>
     <string name="transfer_area_screen_button_account_session">Add novo contato</string>
 
+    <!-- BankType -->
+    <string name="bank_type_brazil">Banco do Brasil</string>
+    <string name="bank_type_nubank">Nubank</string>
+    <string name="bank_type_itau">Itaú Unibanco</string>
+    <string name="bank_type_pan">Banco Pan</string>
+    <string name="bank_type_original">Banco Original</string>
 </resources>

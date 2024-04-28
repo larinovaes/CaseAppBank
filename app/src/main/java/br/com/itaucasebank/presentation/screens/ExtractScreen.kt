@@ -16,7 +16,7 @@ import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ExtractComponent
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.enums.TransactionType
-import br.com.itaucasebank.presentation.model.ExtractModelUIState
+import br.com.itaucasebank.presentation.model.ExtractModel
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 
 @Composable
@@ -46,43 +46,43 @@ private fun ExtractScreen(
 
         SectionExtract(
             extractModel = listOf(
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.PIX,
                     nameUser = "Maria",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.DOC,
                     nameUser = "Maria",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.BOLETO,
                     nameUser = "ComGÁS SP",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.BOLETO,
                     nameUser = "ComGÁS SP",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.BOLETO,
                     nameUser = "ComGÁS SP",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.BOLETO,
                     nameUser = "ComGÁS SP",
                     transactionValue = "R\$ 1.000,00",
                     dateAndTime = "25/05/2024, 10:15 am",
                 ),
-                ExtractModelUIState(
+                ExtractModel(
                     transactionType = TransactionType.BOLETO,
                     nameUser = "ComGÁS SP",
                     transactionValue = "R\$ 1.000,00",
@@ -96,7 +96,7 @@ private fun ExtractScreen(
 
 @Composable
 private fun SectionExtract(
-    extractModel: List<ExtractModelUIState>
+    extractModel: List<ExtractModel>
 ) {
     Column(
         modifier = Modifier

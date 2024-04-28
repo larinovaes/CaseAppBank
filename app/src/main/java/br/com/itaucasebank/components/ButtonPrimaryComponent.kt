@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -21,6 +20,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
@@ -29,18 +29,19 @@ import br.com.itaucasebank.ui.theme.Orange
 @Composable
 fun ButtonPrimaryComponent(
     text: String,
+    modifier: Modifier = Modifier,
+    roundedCornerSize: Dp = 32.dp,
     @DrawableRes icon: Int? = null,
     onClicked: () -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .padding(horizontal = 24.dp, vertical = 16.dp),
+        modifier = Modifier.fillMaxWidth(),
     ) {
         Button(
-            modifier = Modifier
+            modifier = modifier
                 .fillMaxWidth()
                 .size(48.dp)
-                .clip(RoundedCornerShape(24.dp)),
+                .clip(RoundedCornerShape(roundedCornerSize)),
             onClick = { onClicked() },
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Orange,

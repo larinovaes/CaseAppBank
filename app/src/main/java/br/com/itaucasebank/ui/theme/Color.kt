@@ -7,6 +7,7 @@ val Cinza = Color(0xFF898989)
 val Gray  = Color(0xFF747474)
 val LightGray = Color(0xFFa7b4ce)
 val Cinza2 = Color(0xFF979797)
+val Cinza3 = Color(0xFFCBCBCB)
 
 val Purple40 = Color(0xFF3629B7)
 val Orange = Color(0xFFF88339)

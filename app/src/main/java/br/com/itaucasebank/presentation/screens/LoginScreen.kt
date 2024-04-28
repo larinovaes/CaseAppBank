@@ -93,6 +93,7 @@ private fun LoginScreen(
         ButtonPrimaryComponent(
             text = stringResource(id = R.string.login_screen_title),
             icon = null,
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
             onClicked = onButtonAccessClicked
         )
         RegisterButton(onButtonRegisterClicked)

@@ -19,13 +19,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.enums.TransactionType
-import br.com.itaucasebank.presentation.model.ExtractModelUIState
+import br.com.itaucasebank.presentation.model.ExtractModel
 import br.com.itaucasebank.ui.theme.Cinza2
 import br.com.itaucasebank.ui.theme.Purple40
 
 @Composable
 fun ExtractComponent(
-    extractModelUIState: ExtractModelUIState
+    extractModel: ExtractModel
 ) {
     Card(
         modifier = Modifier
@@ -46,14 +46,14 @@ fun ExtractComponent(
             ) {
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = extractModelUIState.transactionType.title),
+                    text = stringResource(id = extractModel.transactionType.title),
                     color = Color.Black,
                     minLines = 1,
                     fontSize = 12.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = extractModelUIState.nameUser,
+                    text = extractModel.nameUser,
                     color = Color.Black,
                     minLines = 1,
                     fontSize = 12.sp,
@@ -73,7 +73,7 @@ fun ExtractComponent(
                     fontSize = 12.sp
                 )
                 Text(
-                    text = extractModelUIState.transactionValue,
+                    text = extractModel.transactionValue,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
@@ -93,7 +93,7 @@ fun ExtractComponent(
                     fontSize = 12.sp
                 )
                 Text(
-                    text = extractModelUIState.dateAndTime,
+                    text = extractModel.dateAndTime,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
@@ -112,7 +112,7 @@ fun ExtractComponent(
 @Preview
 fun TransferDataPreview() {
     val extract =
-        ExtractModelUIState(
+        ExtractModel(
             transactionType = TransactionType.DOC,
             nameUser = "Maria",
             transactionValue = "R\$ 1.000,00",

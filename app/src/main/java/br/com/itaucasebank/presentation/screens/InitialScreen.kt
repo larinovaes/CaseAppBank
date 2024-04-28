@@ -56,6 +56,7 @@ private fun InitialScreen(
         Spacer(modifier = Modifier.height(24.dp))
         ButtonPrimaryComponent(
             text = stringResource(id = R.string.init_screen_button),
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
             icon = R.drawable.ic_arrow,
             onClicked = onButtonAccessClicked
         )
