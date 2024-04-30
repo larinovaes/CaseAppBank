@@ -1,6 +1,6 @@
-package br.com.itaucasebank.presentation.model
+package br.com.itaucasebank.presentation.uistate
 
-data class ContactModel(
+data class ContactUIState(
     val id: String,
     val profileImageUrl: String,
     val name: String,

@@ -23,15 +23,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.itaucasebank.R
-import br.com.itaucasebank.presentation.model.ContactModel
+import br.com.itaucasebank.presentation.uistate.ContactUIState
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import coil.compose.SubcomposeAsyncImage
 
 @Composable
 fun ContactCardComponent(
     onClick: () -> Unit,
-    contacts: ContactModel
+    contacts: ContactUIState
 ) {
     Card(
         modifier = Modifier
@@ -80,7 +79,7 @@ private fun ContactPhoto(profileImageUrl: String) {
 @Composable
 private fun ContactCardComponentPreview() {
     val contacts =
-        ContactModel(
+        ContactUIState(
             id = "1",
             profileImageUrl = "https://media.licdn.com/dms/image/D4D03AQEIBryHBC4dKw/profile-displayphoto-shrink_400_400/0/1696031035294?e=1720051200&v=beta&t=fqLQ--hMjKeYcrIGUKn_TYmMsTbFh_eQcbugRY-cqos",
             name = "Maria"

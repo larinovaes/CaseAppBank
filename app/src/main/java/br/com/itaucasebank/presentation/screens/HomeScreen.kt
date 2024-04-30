@@ -28,6 +28,7 @@ import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -39,12 +40,15 @@ import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.BankCardComponent
 import br.com.itaucasebank.components.MeuButtonComponent
+import br.com.itaucasebank.enums.Menu
 import br.com.itaucasebank.enums.MenuCard
+import br.com.itaucasebank.presentation.viewmodel.AccountDetailsViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import br.com.itaucasebank.ui.theme.Pink
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
@@ -261,44 +265,91 @@ private fun BottomNavigationMenu(
             verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Row {
-                Icon(
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .clickable { onClick() },
-                    painter = painterResource(id = R.drawable.ic_home),
-                    contentDescription = null,
-                    tint = Cinza,
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
+                MenuItem(
+                    menu = Menu.HOME,
+                    isSelected = true
                 )
-                Icon(
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .clickable { onClick() },
-                    painter = painterResource(id = R.drawable.ic_search),
-                    contentDescription = null,
-                    tint = Cinza,
+                MenuItem(
+                    menu = Menu.SEARCH,
+                    isSelected = false
                 )
-                Icon(
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .clickable { onClick() },
-                    painter = painterResource(id = R.drawable.ic_email),
-                    contentDescription = null,
-                    tint = Cinza,
+                MenuItem(
+                    menu = Menu.EMAIL,
+                    isSelected = false
                 )
-
-                Icon(
-                    modifier = Modifier
-                        .padding(24.dp)
-                        .clickable { onClick() },
-                    painter = painterResource(id = R.drawable.ic_settings),
-                    contentDescription = null,
-                    tint = Cinza,
+                MenuItem(
+                    menu = Menu.SETTINGS,
+                    isSelected = false
                 )
+//                Icon(
+//                    modifier = Modifier
+//                        .padding(24.dp)
+//                        .clickable { onClick() },
+//                    painter = painterResource(id = R.drawable.ic_search),
+//                    contentDescription = null,
+//                    tint = Cinza,
+//                )
+//                Icon(
+//                    modifier = Modifier
+//                        .padding(24.dp)
+//                        .clickable { onClick() },
+//                    painter = painterResource(id = R.drawable.ic_email),
+//                    contentDescription = null,
+//                    tint = Cinza,
+//                )
+//
+//                Icon(
+//                    modifier = Modifier
+//                        .padding(24.dp)
+//                        .clickable { onClick() },
+//                    painter = painterResource(id = R.drawable.ic_settings),
+//                    contentDescription = null,
+//                    tint = Cinza,
+//                )
             }
         }
     }
+}
 
+@Composable
+private fun MenuItem(
+    menu: Menu,
+    isSelected: Boolean,
+) {
+    if (isSelected) {
+        Row(
+            modifier = Modifier
+                .clip(RoundedCornerShape(20.dp))
+                .background(Blue)
+                .padding(horizontal = 16.dp, vertical = 8.dp)
+            ,
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            Icon(
+                modifier = Modifier.clickable { },
+                painter = painterResource(id = menu.icon),
+                contentDescription = null,
+                tint = Color.White,
+            )
+            Text(
+                text = stringResource(id = menu.description),
+                fontSize = 12.sp,
+                color = Color.White,
+            )
+        }
+    }
+    else {
+        Icon(
+            modifier = Modifier.padding(24.dp),
+            painter = painterResource(id = menu.icon),
+            contentDescription = null,
+            tint = Cinza,
+        )
+    }
 }
 
 @Preview

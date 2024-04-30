@@ -44,7 +44,7 @@ import br.com.itaucasebank.components.SelectOptionUiState
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.enums.BankType
 import br.com.itaucasebank.enums.TransactionType
-import br.com.itaucasebank.presentation.model.ContactModel
+import br.com.itaucasebank.presentation.uistate.ContactUIState
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
@@ -54,15 +54,15 @@ import br.com.itaucasebank.ui.theme.Purple40
 fun TransferAreaScreen(
     navController: NavController,
 ) {
-    val contactModels = listOf(
-        ContactModel(
+    val contactUIStates = listOf(
+        ContactUIState(
             id = "1",
             profileImageUrl = "https://media.licdn.com/dms/image/D4D03AQEIBryHBC4dKw/profile-displayphoto-shrink_400_400/0/1696031035294?e=1720051200&v=beta&t=fqLQ--hMjKeYcrIGUKn_TYmMsTbFh_eQcbugRY-cqos",
             name = "Larissa",
         )
     )
     TransferAreaScreen(
-        contactModels = contactModels, // todo: Recuperar da ViewModel
+        contactUIStates = contactUIStates, // todo: Recuperar da ViewModel
         accountInputTextValue = "", // todo: Recuperar da ViewModel
         recipientInputTextValue = "", // todo: Recuperar da ViewModel
         recipientCpfInputTextValue = "", // todo: Recuperar da ViewModel
@@ -83,7 +83,7 @@ fun TransferAreaScreen(
 
 @Composable
 private fun TransferAreaScreen(
-    contactModels: List<ContactModel>,
+    contactUIStates: List<ContactUIState>,
     accountInputTextValue: String,
     recipientInputTextValue: String,
     recipientCpfInputTextValue: String,
@@ -121,7 +121,7 @@ private fun TransferAreaScreen(
                 )
                 ContactSection(
                     onClick = onContactClick,
-                    contactModels = contactModels,
+                    contactUIStates = contactUIStates,
                 )
                 InputTextSection(
                     accountInputTextValue = accountInputTextValue,
@@ -159,10 +159,10 @@ private fun TransferAreaScreen(
 @Composable
 private fun ContactSection(
     onClick: () -> Unit,
-    contactModels: List<ContactModel>
+    contactUIStates: List<ContactUIState>
 ) {
     LazyRow {
-        items(contactModels) {
+        items(contactUIStates) {
             Column(
                 modifier = Modifier
                     .padding(start = 24.dp, end = 8.dp)
@@ -377,8 +377,8 @@ private fun TransactionType?.getTextValue(): String {
 @Preview
 @Composable
 private fun TransferAreaPreview() {
-    val contactModels = listOf(
-        ContactModel(
+    val contactUIStates = listOf(
+        ContactUIState(
             id = "1",
             profileImageUrl = "https://media.licdn.com/dms/image/D4D03AQEIBryHBC4dKw/profile-displayphoto-shrink_400_400/0/1696031035294?e=1720051200&v=beta&t=fqLQ--hMjKeYcrIGUKn_TYmMsTbFh_eQcbugRY-cqos",
             name = "Larissa",
@@ -388,7 +388,7 @@ private fun TransferAreaPreview() {
     val selectedTransferType = remember { mutableStateOf(TransactionType.PIX) }
     ItaucasebankTheme {
         TransferAreaScreen(
-            contactModels = contactModels,
+            contactUIStates = contactUIStates,
             accountInputTextValue = "12345-6",
             recipientInputTextValue = "Maria Vieira",
             recipientCpfInputTextValue = "123.456.789-10",

@@ -8,16 +8,22 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
+import br.com.itaucasebank.components.DrawDashLine
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.components.TransferDetailsComponent
 import br.com.itaucasebank.router.Route
+import br.com.itaucasebank.ui.theme.Cinza2
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 
 @Composable
@@ -68,6 +74,7 @@ private fun TransferConfirmationScreen(
             hour = hour,
             transferValue = transferValue,
         )
+        DrawDashLine(modifier = Modifier.padding(horizontal = 34.dp))
         Spacer(modifier = Modifier.height(40.dp))
         ButtonPrimaryComponent(
             modifier = Modifier.padding(horizontal = 48.dp),

@@ -1,5 +1,5 @@
 <resources>
-    <!-- INITIAL -->
+    <!-- Initial Screen -->
     <string name="app_name">itau-case-bank</string>
     <string name="init_screen_button">INICIAR</string>
     <string name="init_screen_title">Itaú Transfer</string>
@@ -8,19 +8,19 @@
     <string name="init_screen_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Elementum ultricies sit nulla etiam sagittis </string>
     <string name="init_screen_content_description_logo">Logo itaú</string>
 
-    <!-- LOGIN -->
+    <!-- Login Screen -->
     <string name="login_screen_title">Login</string>
     <string name="login_screen_subtitle">Bem-vindo ao Itaú Transfer</string>
     <string name="login_screen_text_register">Não tem uma conta? </string>
     <string name="login_screen_button_register">Cadastre-se</string>
 
-    <!-- HOME -->
+    <!-- Home Screen -->
     <string name="home_screen_title">Carlos Daniel</string>
     <string name="home_screen_number_account">342, CC **2390-0</string>
     <string name="home_screen_text_statement_button">Ver Extrato</string>
     <string name="home_screen_text_balance">saldo na conta</string>
 
-    <!-- Extract -->
+    <!-- Extract Screen -->
     <string name="extract_screen_title_toolbar">Extrato</string>
     <string name="extract_screen_text_value">Valor</string>
     <string name="extract_screen_text_date_time">Data e Hora</string>
@@ -29,7 +29,7 @@
     <string name="extract_screen_text_doc">DOC</string>
     <string name="extract_screen_text_ted">TED</string>
 
-    <!-- TransferArea -->
+    <!-- Transfer Area Screen -->
     <string name="transfer_area_screen_title_toolbar">Transferência</string>
     <string name="transfer_area_screen_title_account_session">Contatos recentes</string>
     <string name="transfer_area_screen_button_account_session">Add novo contato</string>
@@ -40,4 +40,10 @@
     <string name="bank_type_itau">Itaú Unibanco</string>
     <string name="bank_type_pan">Banco Pan</string>
     <string name="bank_type_original">Banco Original</string>
+
+    <!-- Menu -->
+    <string name="menu_home">Home</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_email">Email</string>
+    <string name="menu_settings">Settings</string>
 </resources>

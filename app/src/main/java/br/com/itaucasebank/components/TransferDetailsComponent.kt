@@ -1,5 +1,6 @@
 package br.com.itaucasebank.components
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -9,17 +10,19 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Divider
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.ui.theme.Cinza2
+import br.com.itaucasebank.ui.theme.Cinza3
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import br.com.itaucasebank.ui.theme.Pink
 
@@ -38,7 +41,6 @@ fun TransferDetailsComponent(
             .padding(horizontal = 24.dp)
             .fillMaxWidth(),
         shape = RoundedCornerShape(8.dp),
-        elevation = 8.dp,
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -70,9 +72,27 @@ fun TransferDetailsComponent(
                 value = hour,
             )
             Spacer(modifier = Modifier.height(64.dp))
-            Divider()
+            DrawDashLine()
             TransferValueRow(transferValue = transferValue)
         }
+    }
+}
+
+@Composable
+fun DrawDashLine(
+    modifier: Modifier = Modifier
+) {
+    val pathEffect = PathEffect.dashPathEffect(floatArrayOf(20f, 10f), 0f)
+    Canvas(
+        modifier.fillMaxWidth()
+    ) {
+        drawLine(
+            color = Cinza3,
+            strokeWidth = 5f,
+            start = Offset(20f, 0f),
+            end = Offset(size.width - 20, 0f),
+            pathEffect = pathEffect
+        )
     }
 }
 

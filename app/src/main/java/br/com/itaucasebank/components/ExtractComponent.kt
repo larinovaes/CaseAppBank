@@ -18,14 +18,13 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.R
-import br.com.itaucasebank.enums.TransactionType
-import br.com.itaucasebank.presentation.model.ExtractModel
+import br.com.itaucasebank.presentation.uistate.ExtractUIState
 import br.com.itaucasebank.ui.theme.Cinza2
 import br.com.itaucasebank.ui.theme.Purple40
 
 @Composable
 fun ExtractComponent(
-    extractModel: ExtractModel
+    extractUIState: ExtractUIState
 ) {
     Card(
         modifier = Modifier
@@ -46,17 +45,17 @@ fun ExtractComponent(
             ) {
                 Text(
                     modifier = Modifier.weight(1f),
-                    text = stringResource(id = extractModel.transactionType.title),
+                    text =  extractUIState.category,
                     color = Color.Black,
                     minLines = 1,
-                    fontSize = 12.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Text(
-                    text = extractModel.nameUser,
+                    text = extractUIState.name,
                     color = Color.Black,
                     minLines = 1,
-                    fontSize = 12.sp,
+                    fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
 
@@ -73,7 +72,7 @@ fun ExtractComponent(
                     fontSize = 12.sp
                 )
                 Text(
-                    text = extractModel.transactionValue,
+                    text = extractUIState.amount,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
@@ -93,7 +92,7 @@ fun ExtractComponent(
                     fontSize = 12.sp
                 )
                 Text(
-                    text = extractModel.dateAndTime,
+                    text = extractUIState.createdAt,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
@@ -110,13 +109,14 @@ fun ExtractComponent(
 
 @Composable
 @Preview
-fun TransferDataPreview() {
+fun ExtractUIStatePreview() {
     val extract =
-        ExtractModel(
-            transactionType = TransactionType.DOC,
-            nameUser = "Maria",
-            transactionValue = "R\$ 1.000,00",
-            dateAndTime = "25/05/2024, 10:15 am",
+        ExtractUIState(
+            id = "1",
+            name = "Maria",
+            category = "PIX",
+            amount = "R\$ 1.000,00",
+            createdAt = "25/05/2024, 10:15 am",
         )
     ExtractComponent(extract)
 }

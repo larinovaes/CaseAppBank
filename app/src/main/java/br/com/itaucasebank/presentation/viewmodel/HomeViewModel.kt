@@ -3,9 +3,6 @@ package br.com.itaucasebank.presentation.viewmodel
 import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import br.com.itaucasebank.R
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-
 class HomeViewModel: ViewModel() {
 
 //    private val _uiState = MutableStateFlow(getInitialUiState())
