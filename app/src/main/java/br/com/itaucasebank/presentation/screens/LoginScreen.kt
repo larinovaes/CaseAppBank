@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,6 +23,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -41,6 +43,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
+import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.presentation.viewmodel.LoginViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Black
@@ -56,50 +59,75 @@ fun LoginScreen(
     viewModel: LoginViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
-
     LoginScreen(
         emailValue = uiState.value.email,
         passwordValue = uiState.value.password,
+        isLoading = uiState.value.isLoading,
+        isCredentialErrorVisible = uiState.value.isCredentialErrorVisible,
         onEmailChanged = { viewModel.setEmail(it) },
         onPasswordChanged = { viewModel.setPassword(it) },
-        onButtonAccessClicked = { navController.navigate(Route.HOME.name) },
-        onButtonRegisterClicked = { }
+        onButtonAccessClicked = { viewModel.authenticate() },
+        onButtonRegisterClicked = { },
     )
+    LaunchedEffect(key1 = Unit) {
+        viewModel.uiEvent.collect {
+            when (it) {
+                LoginViewModel.UiEvent.NavigateToHome -> navController.navigate(Route.HOME.name)
+            }
+        }
+    }
 }
 
 @Composable
 private fun LoginScreen(
     emailValue: String,
     passwordValue: String,
+    isLoading: Boolean,
+    isCredentialErrorVisible: Boolean,
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
     onButtonAccessClicked: () -> Unit,
     onButtonRegisterClicked: () -> Unit,
 ) {
-    Column(
+    Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
     ) {
-        TitleAndSubtitle()
-        Spacer(modifier = Modifier.height(44.dp))
-        SectionInputFields(
-            emailValue = emailValue,
-            passwordValue = passwordValue,
-            onEmailChanged = onEmailChanged,
-            onPasswordChanged = onPasswordChanged
-        )
-        Spacer(modifier = Modifier.height(150.dp))
-        ButtonPrimaryComponent(
-            text = stringResource(id = R.string.login_screen_title),
-            icon = null,
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
-            onClicked = onButtonAccessClicked
-        )
-        RegisterButton(onButtonRegisterClicked)
-        Spacer(modifier = Modifier.height(24.dp))
-        Divider(color = ColorDivider, thickness = 1.dp)
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White)
+        ) {
+            TitleAndSubtitle()
+            Spacer(modifier = Modifier.height(44.dp))
+            SectionInputFields(
+                emailValue = emailValue,
+                passwordValue = passwordValue,
+                onEmailChanged = onEmailChanged,
+                onPasswordChanged = onPasswordChanged
+            )
+            if (isCredentialErrorVisible) {
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 24.dp, vertical = 16.dp),
+                    text = "Email or senha estão inválidos",
+                    color = Color.Red
+                )
+            }
+            Spacer(modifier = Modifier.height(150.dp))
+            ButtonPrimaryComponent(
+                text = stringResource(id = R.string.login_screen_title),
+                icon = null,
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
+                onClicked = onButtonAccessClicked
+            )
+            RegisterButton(onButtonRegisterClicked)
+            Spacer(modifier = Modifier.height(24.dp))
+            Divider(color = ColorDivider, thickness = 1.dp)
+        }
+        if (isLoading) LoadingComponent(isOverlayEnabled = isLoading)
     }
+
 }
 
 @Composable
@@ -237,7 +265,7 @@ private fun RegisterButton(onClick: () -> Unit) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
-    ){
+    ) {
         Text(text = stringResource(id = R.string.login_screen_text_register), color = ColorInput)
         Text(
             modifier = Modifier
@@ -258,10 +286,12 @@ private fun LoginPreview() {
         LoginScreen(
             emailValue = "larissa@email.com",
             passwordValue = "12345",
+            isLoading = false,
+            isCredentialErrorVisible = false,
             onEmailChanged = {},
             onPasswordChanged = {},
             onButtonAccessClicked = {},
-            onButtonRegisterClicked = {},
+            onButtonRegisterClicked = {}
         )
     }
 }

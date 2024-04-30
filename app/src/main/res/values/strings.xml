@@ -15,8 +15,6 @@
     <string name="login_screen_button_register">Cadastre-se</string>
 
     <!-- Home Screen -->
-    <string name="home_screen_title">Carlos Daniel</string>
-    <string name="home_screen_number_account">342, CC **2390-0</string>
     <string name="home_screen_text_statement_button">Ver Extrato</string>
     <string name="home_screen_text_balance">saldo na conta</string>
 

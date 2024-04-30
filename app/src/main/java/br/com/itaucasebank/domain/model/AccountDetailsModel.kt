@@ -1,4 +1,4 @@
-package br.com.itaucasebank.domain
+package br.com.itaucasebank.domain.model
 
 data class AccountDetailsModel(
     val id: String,

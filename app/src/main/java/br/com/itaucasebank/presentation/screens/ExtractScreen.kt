@@ -19,14 +19,14 @@ import br.com.itaucasebank.components.ExtractComponent
 import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
-import br.com.itaucasebank.presentation.viewmodel.AccountDetailsViewModel
+import br.com.itaucasebank.presentation.viewmodel.ExtractViewModel
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ExtractScreen(
     navController: NavController,
-    viewModel: AccountDetailsViewModel = koinViewModel()
+    viewModel: ExtractViewModel = koinViewModel()
 ) {
     val uiState = viewModel.uiState.collectAsState()
 
@@ -36,7 +36,7 @@ fun ExtractScreen(
         extract = uiState.value.extractList,
         isLoading = uiState.value.isLoading,
         isError = uiState.value.isError,
-        onClickRetry = {viewModel.getPaymentStatement("1")}
+        onClickRetry = { viewModel.getExtracts() }
     )
 }
 

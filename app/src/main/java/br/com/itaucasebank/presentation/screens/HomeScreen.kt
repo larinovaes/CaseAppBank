@@ -1,8 +1,6 @@
 package br.com.itaucasebank.presentation.screens
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -26,6 +24,7 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -37,98 +36,109 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import br.com.itaucasebank.R
 import br.com.itaucasebank.components.BankCardComponent
+import br.com.itaucasebank.components.ErrorMessageComponent
+import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.components.MeuButtonComponent
 import br.com.itaucasebank.enums.Menu
 import br.com.itaucasebank.enums.MenuCard
-import br.com.itaucasebank.presentation.viewmodel.AccountDetailsViewModel
+import br.com.itaucasebank.presentation.viewmodel.HomeViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.ItaucasebankTheme
 import br.com.itaucasebank.ui.theme.Pink
+import coil.compose.AsyncImage
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun HomeScreen(
     navController: NavController,
+    viewModel: HomeViewModel = koinViewModel()
 ) {
+    val uiState = viewModel.uiState.collectAsState()
     HomeScreen(
-        profileImage = R.drawable.ic_icon_person,
-        nameUser = stringResource(id = R.string.home_screen_title),
-        numberAccount = stringResource(id = R.string.home_screen_number_account),
+        profileImageUrl = uiState.value.profileImageUrl,
+        userName = uiState.value.userName,
+        accountNumber = uiState.value.accountNumber,
+        agencyNumber = uiState.value.agencyNumber,
+        notificationCount = uiState.value.notificationCount,
+        balanceValue = uiState.value.balanceValue,
+        isLoading = uiState.value.isLoading,
+        isError = uiState.value.isError,
         buttonNotification = {},
-        balanceValue = "R\$ 3.450,00",
-        accountStatementButton = {
-            navController.navigate(Route.EXTRACT.name)
-        },
-        notificationCount = 3,
-        isNotification = true,
-        onItemClickMenuCard = {
-            navController.navigate(Route.TRANSFER_AREA.name)
-        },
-        onClick = {}
+        accountStatementButton = { navController.navigate(Route.EXTRACT.name) },
+        onItemClickMenuCard = { navController.navigate(Route.TRANSFER_AREA.name) },
+        onRetry = {},
+        onBottomNavigationItemClick = {}
     )
 }
 
 @Composable
 private fun HomeScreen(
-    @DrawableRes profileImage: Int,
-    nameUser: String,
-    numberAccount: String,
+    profileImageUrl: String,
+    userName: String,
+    accountNumber: String,
+    agencyNumber: String,
     balanceValue: String,
+    notificationCount: Int,
+    isLoading: Boolean,
+    isError: Boolean,
     buttonNotification: () -> Unit,
     accountStatementButton: () -> Unit,
-    isNotification: Boolean = false,
-    notificationCount: Int = 3,
     onItemClickMenuCard: () -> Unit,
-    onClick: () -> Unit
+    onRetry: () -> Unit,
+    onBottomNavigationItemClick: () -> Unit,
 ) {
+    val backgroundColor = if (isLoading || isError) Color.White else Blue
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Blue),
+            .background(backgroundColor),
         contentAlignment = Alignment.BottomCenter,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxHeight()
-        ) {
-            Row(
+        if (isLoading) {
+            LoadingComponent()
+        } else if (isError) {
+            ErrorMessageComponent(onClick = onRetry)
+        } else {
+            Column(
                 modifier = Modifier
-                    .padding(vertical = 8.dp)
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center
+                    .fillMaxHeight()
             ) {
-                Profile(profileImage = profileImage)
-                UserInformationSection(
-                    nameUser = nameUser,
-                    numberAccount = numberAccount
-                )
-                SectionNotification(
-                    buttonNotification = buttonNotification,
-                    isNotification = isNotification,
-                    notificationCount = notificationCount
+                Row(
+                    modifier = Modifier
+                        .padding(vertical = 8.dp)
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Profile(profileImageUrl = profileImageUrl)
+                    UserInformationSection(
+                        userName = userName,
+                        accountNumber = accountNumber,
+                        agencyNumber = agencyNumber,
+                    )
+                    SectionNotification(
+                        buttonNotification = buttonNotification,
+                        notificationCount = notificationCount
+                    )
+                }
+                Spacer(modifier = Modifier.height(14.dp))
+                FinancialSection(
+                    nameUser = userName,
+                    balanceValue = balanceValue,
+                    accountStatementButton = accountStatementButton,
+                    onItemClick = onItemClickMenuCard
                 )
             }
-            Spacer(modifier = Modifier.height(14.dp))
-            FinancialSection(
-                nameUser = nameUser,
-                balanceValue = balanceValue,
-                accountStatementButton = accountStatementButton,
-                onItemClick = onItemClickMenuCard
-            )
         }
-        BottomNavigationMenu(onClick)
+        BottomNavigationMenu(onBottomNavigationItemClick)
     }
 }
 
 @Composable
-private fun Profile(
-    @DrawableRes profileImage: Int,
-) {
+private fun Profile(profileImageUrl: String) {
     Surface(
         modifier = Modifier
             .size(54.dp)
@@ -137,27 +147,26 @@ private fun Profile(
         border = BorderStroke(0.5.dp, Color.Transparent),
         elevation = 4.dp,
     ) {
-        Image(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Transparent),
-            alignment = Alignment.Center,
-            painter = painterResource(id = profileImage),
-            contentDescription = "profile image",
+        AsyncImage(
+            model = profileImageUrl,
+            contentDescription = null,
             contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(50.dp),
         )
     }
 }
 
 @Composable
 private fun SectionNotification(
-    buttonNotification: () -> Unit,
-    isNotification: Boolean = false,
-    notificationCount: Int = 0
+    notificationCount: Int = 0,
+    buttonNotification: () -> Unit = {},
 ) {
+    val isNotificationCountVisible = notificationCount > 0
     IconButton(
         onClick = { buttonNotification() },
-        enabled = isNotification
+        enabled = isNotificationCountVisible,
     ) {
         Box {
             Icon(
@@ -168,7 +177,7 @@ private fun SectionNotification(
                 contentDescription = null,
                 tint = Color.White,
             )
-            if (isNotification) {
+            if (isNotificationCountVisible) {
                 Text(
                     text = notificationCount.toString(),
                     modifier = Modifier
@@ -187,37 +196,23 @@ private fun SectionNotification(
 
 @Composable
 private fun UserInformationSection(
-    nameUser: String,
-    numberAccount: String
+    userName: String,
+    accountNumber: String,
+    agencyNumber: String,
 ) {
     Column(
         modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
     ) {
-        Row {
-            Text(
-                text = "Olá, ",
-                color = Color.White,
-                minLines = 1,
-            )
-            Text(
-                text = nameUser,
-                color = Color.White,
-                minLines = 1,
-            )
-        }
-        Row {
-            Text(
-                text = "Ag. ",
-                color = Color.White,
-                minLines = 1,
-            )
-
-            Text(
-                text = numberAccount,
-                color = Color.White,
-                minLines = 1,
-            )
-        }
+        Text(
+            text = "Olá, $userName",
+            color = Color.White,
+            minLines = 1,
+        )
+        Text(
+            text = "Ag. $agencyNumber, CC $accountNumber",
+            color = Color.White,
+            minLines = 1,
+        )
     }
 }
 
@@ -252,9 +247,7 @@ private fun FinancialSection(
 }
 
 @Composable
-private fun BottomNavigationMenu(
-    onClick: () -> Unit
-) {
+private fun BottomNavigationMenu(onClick: () -> Unit) {
     Card(
         elevation = 16.dp
     ) {
@@ -284,31 +277,6 @@ private fun BottomNavigationMenu(
                     menu = Menu.SETTINGS,
                     isSelected = false
                 )
-//                Icon(
-//                    modifier = Modifier
-//                        .padding(24.dp)
-//                        .clickable { onClick() },
-//                    painter = painterResource(id = R.drawable.ic_search),
-//                    contentDescription = null,
-//                    tint = Cinza,
-//                )
-//                Icon(
-//                    modifier = Modifier
-//                        .padding(24.dp)
-//                        .clickable { onClick() },
-//                    painter = painterResource(id = R.drawable.ic_email),
-//                    contentDescription = null,
-//                    tint = Cinza,
-//                )
-//
-//                Icon(
-//                    modifier = Modifier
-//                        .padding(24.dp)
-//                        .clickable { onClick() },
-//                    painter = painterResource(id = R.drawable.ic_settings),
-//                    contentDescription = null,
-//                    tint = Cinza,
-//                )
             }
         }
     }
@@ -324,8 +292,7 @@ private fun MenuItem(
             modifier = Modifier
                 .clip(RoundedCornerShape(20.dp))
                 .background(Blue)
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-            ,
+                .padding(horizontal = 16.dp, vertical = 8.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(4.dp),
         ) {
@@ -341,8 +308,7 @@ private fun MenuItem(
                 color = Color.White,
             )
         }
-    }
-    else {
+    } else {
         Icon(
             modifier = Modifier.padding(24.dp),
             painter = painterResource(id = menu.icon),
@@ -357,16 +323,19 @@ private fun MenuItem(
 private fun HomePreview() {
     ItaucasebankTheme {
         HomeScreen(
-            profileImage = R.drawable.ic_icon_person,
-            nameUser = stringResource(id = R.string.home_screen_title),
-            numberAccount = stringResource(id = R.string.home_screen_number_account),
+            profileImageUrl = "",
+            userName = "Carlos Daniel",
+            agencyNumber = "342",
+            accountNumber = "**2390-0",
             buttonNotification = {},
             balanceValue = "R\$ 3.450,00",
+            isLoading = false,
+            isError = false,
             accountStatementButton = {},
-            isNotification = true,
             notificationCount = 3,
             onItemClickMenuCard = {},
-            onClick = {}
+            onRetry = {},
+            onBottomNavigationItemClick = {}
         )
     }
 }

@@ -1,8 +1,8 @@
-package br.com.itaucasebank.presentation.extension
+package br.com.itaucasebank.domain.mapper
 
 import br.com.itaucasebank.data.remote.dto.AccountDetailsDto
-import br.com.itaucasebank.domain.AccountDetailsModel
-import br.com.itaucasebank.domain.PaymentModel
+import br.com.itaucasebank.domain.model.AccountDetailsModel
+import br.com.itaucasebank.domain.model.PaymentModel
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
 
 fun List<AccountDetailsDto>.toModel(): List<AccountDetailsModel> {

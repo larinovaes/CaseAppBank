@@ -2,39 +2,35 @@ package br.com.itaucasebank.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.itaucasebank.data.repository.Repository
-import br.com.itaucasebank.domain.AccountDetailsModel
-import br.com.itaucasebank.presentation.extension.toConverter
+import br.com.itaucasebank.domain.mapper.toConverter
+import br.com.itaucasebank.domain.model.PaymentModel
+import br.com.itaucasebank.domain.usecase.GetPaymentModelsUseCase
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class AccountDetailsViewModel(
-    private val repository: Repository
+class ExtractViewModel(
+    private val getPaymentModelsUseCase: GetPaymentModelsUseCase,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UIState())
     val uiState = _uiState.asStateFlow()
 
     init {
-        getPaymentStatement("1")
+        getExtracts()
     }
 
-    fun getPaymentStatement(userId: String) = viewModelScope.launch {
+    fun getExtracts() = viewModelScope.launch {
         _uiState.update { it.copy(isLoading = true, isError = false) }
-        repository.runCatching {
-            getPaymentStatement(userId)
-                .onSuccess { handleSuccess(it) }
-                .onFailure {_uiState.update { it.copy(isLoading = false, isError = true) } }
-        }
+        getPaymentModelsUseCase.execute()
+            .onSuccess { handleSuccess(it) }
+            .onFailure { _uiState.update { it.copy(isLoading = false, isError = true) } }
     }
 
-    private fun handleSuccess(accountDetailsModels: List<AccountDetailsModel>) {
-        val extractUIStateList = accountDetailsModels
-            .map { it.payments.toConverter() }
-            .flatten()
+    private fun handleSuccess(paymentModels: List<PaymentModel>) {
+        val extractUIStateList = paymentModels.toConverter()
         _uiState.update { it.copy(isLoading = false, extractList = extractUIStateList) }
     }
 

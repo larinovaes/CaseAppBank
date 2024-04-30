@@ -8,8 +8,8 @@ import retrofit2.http.Path
 
 interface AppApi {
     @GET("/api/v1/user")
-    suspend fun getUser(): Response<List<UserDto>>
+    suspend fun getUsers(): Response<List<UserDto>>
 
     @GET("/api/v1/user/{id}/account")
-    suspend fun getPaymentStatement(@Path("id") userId: String): Response<List<AccountDetailsDto>>
+    suspend fun getAccounts(@Path("id") userId: String): Response<List<AccountDetailsDto>>
 }
