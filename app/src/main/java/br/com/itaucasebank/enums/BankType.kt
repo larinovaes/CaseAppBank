@@ -26,5 +26,9 @@ enum class BankType(
     ORIGINAL(
         code = "225",
         description = R.string.bank_type_original,
+    ),
+    NONE(
+        code = "",
+        description = R.string.bank_type_none,
     )
 }

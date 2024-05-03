@@ -20,7 +20,7 @@ import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
 import br.com.itaucasebank.presentation.viewmodel.ExtractViewModel
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -101,7 +101,7 @@ private fun ExtractPreview() {
             createdAt = "25/05/2024, 10:15 am",
         ),
     )
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         ExtractScreen(
             title = "Extrato",
             onBackClick = { },

@@ -16,18 +16,18 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.Cinza2
 import br.com.itaucasebank.ui.theme.Cinza3
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
@@ -35,6 +35,7 @@ fun InputTextComponent(
     title: String,
     text: String,
     modifier: Modifier = Modifier,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     onValueChange: (String) -> Unit = {},
     onClick: (() -> Unit)? = null
 ) {
@@ -55,6 +56,7 @@ fun InputTextComponent(
             value = text,
             onValueChange = onValueChange,
             shape = RoundedCornerShape(16.dp),
+            visualTransformation = visualTransformation,
             colors = OutlinedTextFieldDefaults.colors(
                 unfocusedBorderColor = Cinza3,
                 focusedBorderColor = Orange,
@@ -83,7 +85,7 @@ fun InputTextComponent(
 @Preview
 @Composable
 private fun InputTextComponentPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         Column(
             modifier = Modifier
                 .background(Color.White)

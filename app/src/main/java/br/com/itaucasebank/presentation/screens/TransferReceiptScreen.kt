@@ -11,14 +11,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,38 +28,32 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
+import br.com.itaucasebank.components.DrawDashLine
 import br.com.itaucasebank.components.SendReceiptDialogComponent
+import br.com.itaucasebank.components.TextComponent
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.components.TransferDetailsComponent
+import br.com.itaucasebank.presentation.uistate.TransferDetailsUIState
+import br.com.itaucasebank.presentation.viewmodel.TransferSharedViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Green
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TransferReceiptScreen(
     navController: NavController,
+    viewModel: TransferSharedViewModel = koinViewModel()
 ) {
     TransferReceiptScreen(
-        name = "Maria Ernesta", // todo: Recuperar da ViewModel
-        cpf = "123.456.789-11", // todo: Recuperar da ViewModel
-        agency = "342 - Nubank", // todo: Recuperar da ViewModel
-        accountNumber = "12345-7", // todo: Recuperar da ViewModel
-        date = "18/04/2025", // todo: Recuperar da ViewModel
-        hour = "10:26 am", // todo: Recuperar da ViewModel
-        transferValue = "R$ 520,00", // todo: Recuperar da ViewModel
+        transferDetailsUIState = viewModel.transferDetailsUiState.collectAsState().value,
         onBackClick = { navController.popBackStack(Route.HOME.name, inclusive = false) },
     )
 }
 
 @Composable
 private fun TransferReceiptScreen(
-    name: String,
-    cpf: String,
-    agency: String,
-    accountNumber: String,
-    date: String,
-    hour: String,
-    transferValue: String,
+    transferDetailsUIState: TransferDetailsUIState,
     onBackClick: () -> Unit,
 ) {
     val shouldOpenSendReceiptDialog = remember { mutableStateOf(false) }
@@ -69,7 +64,7 @@ private fun TransferReceiptScreen(
     ) {
         Column {
             ToolbarComponent(
-                title = "Comprovante",
+                title = stringResource(id = R.string.transfer_receipt_screen_toolbar_title),
                 onClick = onBackClick,
             )
             Column(
@@ -85,8 +80,8 @@ private fun TransferReceiptScreen(
                     contentDescription = null,
                 )
                 Spacer(modifier = Modifier.height(32.dp))
-                Text(
-                    text = "Transferência concluída com sucesso!",
+                TextComponent(
+                    text = stringResource(id = R.string.transfer_receipt_screen_message_success),
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Medium,
                     textAlign = TextAlign.Center,
@@ -94,18 +89,15 @@ private fun TransferReceiptScreen(
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 TransferDetailsComponent(
-                    name = name,
-                    cpf = cpf,
-                    agency = agency,
-                    accountNumber = accountNumber,
-                    date = date,
-                    hour = hour,
-                    transferValue = transferValue,
+                    transferDetailsUIState = transferDetailsUIState
+                )
+                DrawDashLine(
+                    modifier = Modifier.padding(horizontal = 34.dp)
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 ButtonPrimaryComponent(
                     modifier = Modifier.padding(horizontal = 48.dp),
-                    text = "Enviar Comprovante",
+                    text = stringResource(id = R.string.transfer_receipt_screen_button_text),
                     roundedCornerSize = 16.dp,
                     onClicked = { shouldOpenSendReceiptDialog.value = true },
                 )
@@ -123,15 +115,10 @@ private fun TransferReceiptScreen(
 @Preview
 @Composable
 private fun TransferConfirmationScreenPreview() {
-    ItaucasebankTheme {
+    val transferDetailsUIState = TransferDetailsUIState()
+    ItauCaseBankTheme {
         TransferReceiptScreen(
-            name = "Maria Vieira",
-            cpf = "123.456.789-10",
-            agency = "342 - Itaú Unibanco",
-            accountNumber = "12345-6",
-            date = "18/04/2024",
-            hour = "10:25 am",
-            transferValue = "R$ 500,00",
+            transferDetailsUIState = transferDetailsUIState,
             onBackClick = { },
         )
     }

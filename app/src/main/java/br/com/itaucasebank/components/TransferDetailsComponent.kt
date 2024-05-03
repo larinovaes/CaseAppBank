@@ -10,21 +10,38 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.PathEffect
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import br.com.itaucasebank.R
+import br.com.itaucasebank.core.formatToAccountNumberComponent
+import br.com.itaucasebank.core.formatToCurrency
+import br.com.itaucasebank.presentation.uistate.TransferDetailsUIState
 import br.com.itaucasebank.ui.theme.Cinza2
 import br.com.itaucasebank.ui.theme.Cinza3
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Pink
+
+@Composable
+fun TransferDetailsComponent(transferDetailsUIState: TransferDetailsUIState) {
+    TransferDetailsComponent(
+        name = transferDetailsUIState.name,
+        cpf = transferDetailsUIState.cpf,
+        agency = transferDetailsUIState.agency,
+        accountNumber = transferDetailsUIState.accountNumber.formatToAccountNumberComponent(),
+        date = transferDetailsUIState.date,
+        hour = transferDetailsUIState.hour,
+        transferValue = transferDetailsUIState.transferValue.formatToCurrency()
+    )
+}
 
 @Composable
 fun TransferDetailsComponent(
@@ -47,28 +64,28 @@ fun TransferDetailsComponent(
             verticalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             DetailsRow(
-                title = "Nome",
+                title = stringResource(id = R.string.transfer_details_name),
                 value = name,
             )
             DetailsRow(
-                title = "CPF",
+                title = stringResource(id = R.string.transfer_details_cpf),
                 value = cpf,
             )
             Spacer(modifier = Modifier.height(8.dp))
             DetailsRow(
-                title = "Agência",
+                title = stringResource(id = R.string.transfer_details_agency),
                 value = agency,
             )
             DetailsRow(
-                title = "Conta",
+                title = stringResource(id = R.string.transfer_details_account),
                 value = accountNumber,
             )
             DetailsRow(
-                title = "Data",
+                title = stringResource(id = R.string.transfer_details_date),
                 value = date,
             )
             DetailsRow(
-                title = "Hora",
+                title = stringResource(id = R.string.transfer_details_hour),
                 value = hour,
             )
             Spacer(modifier = Modifier.height(64.dp))
@@ -105,14 +122,14 @@ private fun DetailsRow(
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
+        TextComponent(
             text = title,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
             color = Cinza2,
         )
         Spacer(modifier = Modifier.weight(1F))
-        Text(
+        TextComponent(
             text = value,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
@@ -127,14 +144,14 @@ private fun TransferValueRow(transferValue: String) {
         verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
+        TextComponent(
             text = "VALOR",
             fontSize = 16.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color.Black,
         )
         Spacer(modifier = Modifier.weight(1F))
-        Text(
+        TextComponent(
             text = transferValue,
             fontSize = 24.sp,
             fontWeight = FontWeight.SemiBold,
@@ -146,7 +163,7 @@ private fun TransferValueRow(transferValue: String) {
 @Preview
 @Composable
 private fun TransferDetailsComponentPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         TransferDetailsComponent(
             name = "Maria Vieira",
             cpf = "123.456.789-10",

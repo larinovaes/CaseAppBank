@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -30,7 +29,7 @@ fun ToolbarComponent(
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     TopAppBar(
         title = {
-            Text(
+            TextComponent(
                 modifier = Modifier
                     .padding(horizontal = 34.dp),
                 text = title,
@@ -56,7 +55,7 @@ fun ToolbarComponent(
 @Preview
 @Composable
 private fun ToolbarComponentPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         ToolbarComponent(
             title = "Extrato",
             onClick = {}

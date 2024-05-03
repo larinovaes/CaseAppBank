@@ -16,7 +16,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Close
@@ -31,7 +30,7 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import br.com.itaucasebank.ui.theme.Cinza
 import br.com.itaucasebank.ui.theme.Cinza2
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Purple40
 
 data class SelectOptionUiState(
@@ -42,7 +41,7 @@ data class SelectOptionUiState(
 @Composable
 fun SelectOptionDialogComponent(
     title: String,
-    selectedOption: SelectOptionUiState,
+    selectedOption: SelectOptionUiState?,
     selectOptionList: List<SelectOptionUiState>,
     onSelectedOption: (SelectOptionUiState) -> Unit,
     onDismissRequest: () -> Unit,
@@ -64,7 +63,7 @@ fun SelectOptionDialogComponent(
                 ) {
                     items(selectOptionList) {
                         OptionItem(
-                            isSelected = selectedOption.id == it.id,
+                            isSelected = selectedOption?.id == it.id,
                             selectOption = it,
                             onClick = {
                                 onSelectedOption(it)
@@ -87,7 +86,7 @@ private fun TopSection(
     Box(
         modifier = Modifier.fillMaxWidth()
     ) {
-        Text(
+        TextComponent(
             text = title,
             modifier = Modifier
                 .padding(vertical = 24.dp, horizontal = 32.dp)
@@ -122,7 +121,7 @@ private fun OptionItem(
             .fillMaxWidth()
             .padding(horizontal = 24.dp)
     ) {
-        Text(
+        TextComponent(
             text = selectOption.text,
             fontSize = 16.sp,
             fontWeight = FontWeight.Medium,
@@ -156,7 +155,7 @@ private fun SelectOptionDialogComponentPreview() {
             text = "342 - Itaú Unibanco",
         )
     )
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         Box(modifier = Modifier.fillMaxSize()) {
             SelectOptionDialogComponent(
                 title = "Selecione o tipo de Transferência",

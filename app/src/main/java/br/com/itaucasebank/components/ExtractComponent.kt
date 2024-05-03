@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,7 +42,7 @@ fun ExtractComponent(
                     .padding(vertical = 16.dp, horizontal = 16.dp)
                     .fillMaxWidth(),
             ) {
-                Text(
+                TextComponent(
                     modifier = Modifier.weight(1f),
                     text =  extractUIState.category,
                     color = Color.Black,
@@ -51,7 +50,7 @@ fun ExtractComponent(
                     fontSize = 16.sp,
                     fontWeight = FontWeight.Bold
                 )
-                Text(
+                TextComponent(
                     text = extractUIState.name,
                     color = Color.Black,
                     minLines = 1,
@@ -65,13 +64,13 @@ fun ExtractComponent(
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
             ) {
-                Text(
+                TextComponent(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = R.string.extract_screen_text_value),
                     color = Cinza2,
                     fontSize = 12.sp
                 )
-                Text(
+                TextComponent(
                     text = extractUIState.amount,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,
@@ -85,13 +84,13 @@ fun ExtractComponent(
                 modifier = Modifier
                     .padding(top = 8.dp, start = 16.dp, bottom = 16.dp, end = 16.dp)
             ) {
-                Text(
+                TextComponent(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = R.string.extract_screen_text_date_time),
                     color = Cinza2,
                     fontSize = 12.sp
                 )
-                Text(
+                TextComponent(
                     text = extractUIState.createdAt,
                     color = Purple40,
                     fontWeight = FontWeight.Bold,

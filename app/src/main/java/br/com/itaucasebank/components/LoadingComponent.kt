@@ -12,7 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
@@ -42,7 +42,7 @@ fun LoadingComponent(
 @Preview
 @Composable
 fun LoadingComponentPreview(){
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         LoadingComponent()
     }
 }

@@ -18,8 +18,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.runtime.Composable
@@ -40,16 +38,18 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
 import br.com.itaucasebank.components.LoadingComponent
+import br.com.itaucasebank.components.TextComponent
 import br.com.itaucasebank.presentation.viewmodel.LoginViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Black
 import br.com.itaucasebank.ui.theme.ColorDivider
 import br.com.itaucasebank.ui.theme.ColorInput
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Orange
 import org.koin.androidx.compose.koinViewModel
 
@@ -72,7 +72,11 @@ fun LoginScreen(
     LaunchedEffect(key1 = Unit) {
         viewModel.uiEvent.collect {
             when (it) {
-                LoginViewModel.UiEvent.NavigateToHome -> navController.navigate(Route.HOME.name)
+                LoginViewModel.UiEvent.NavigateToHome -> navController.navigate(Route.HOME.name) {
+                    popUpTo(0)
+                }
+
+                else -> {}
             }
         }
     }
@@ -107,10 +111,10 @@ private fun LoginScreen(
                 onPasswordChanged = onPasswordChanged
             )
             if (isCredentialErrorVisible) {
-                Text(
+                TextComponent(
                     modifier = Modifier
                         .padding(horizontal = 24.dp, vertical = 16.dp),
-                    text = "Email or senha estão inválidos",
+                    text = stringResource(id = R.string.login_screen_message_error),
                     color = Color.Red
                 )
             }
@@ -136,17 +140,17 @@ private fun TitleAndSubtitle() {
         modifier = Modifier
             .padding(top = 150.dp)
     ) {
-        Text(
+        TextComponent(
             modifier = Modifier
                 .padding(horizontal = 34.dp),
             text = stringResource(id = R.string.login_screen_title),
-            style = MaterialTheme.typography.h5,
+            fontSize = 24.sp,
             color = Black,
             fontWeight = FontWeight.Bold,
             minLines = 1,
         )
         Spacer(modifier = Modifier.height(8.dp))
-        Text(
+        TextComponent(
             modifier = Modifier
                 .padding(horizontal = 34.dp),
             text = stringResource(id = R.string.login_screen_subtitle),
@@ -193,7 +197,7 @@ private fun EmailTextField(
             .fillMaxWidth(),
         value = email,
         onValueChange = onValueChange,
-        label = { Text(text = "E-mail") },
+        label = { TextComponent(text = stringResource(id = R.string.login_screen_email_password)) },
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
@@ -226,7 +230,7 @@ private fun PasswordTextField(
         singleLine = true,
         visualTransformation = if (passwordHidden) PasswordVisualTransformation() else VisualTransformation.None,
         label = {
-            Text(text = "Password")
+            TextComponent(text = stringResource(id = R.string.login_screen_label_password))
         },
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.textFieldColors(
@@ -250,7 +254,9 @@ private fun PasswordTextField(
                     if (passwordHidden) painterResource(id = R.drawable.ic_eye_close) else painterResource(
                         id = R.drawable.ic_eye
                     )
-                val description = if (passwordHidden) "Show password" else "Hide password"
+                val description = if (passwordHidden)
+                    stringResource(id = R.string.login_screen_show_password)
+                else stringResource(id = R.string.login_screen_hide_password)
                 Image(
                     painter = visibilityIcon,
                     contentDescription = description,
@@ -266,14 +272,16 @@ private fun RegisterButton(onClick: () -> Unit) {
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.Center
     ) {
-        Text(text = stringResource(id = R.string.login_screen_text_register), color = ColorInput)
-        Text(
+        TextComponent(
+            text = stringResource(id = R.string.login_screen_text_register),
+            color = Color(0xFF171717).copy(alpha = 0.60F),
+        )
+        TextComponent(
             modifier = Modifier
                 .clickable { onClick() }
                 .padding(start = 4.dp),
             text = stringResource(id = R.string.login_screen_button_register),
             color = Color.Black,
-            fontWeight = FontWeight.Bold,
         )
     }
 
@@ -282,7 +290,7 @@ private fun RegisterButton(onClick: () -> Unit) {
 @Preview
 @Composable
 private fun LoginPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         LoginScreen(
             emailValue = "larissa@email.com",
             passwordValue = "12345",

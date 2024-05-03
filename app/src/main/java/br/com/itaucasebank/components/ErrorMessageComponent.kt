@@ -21,9 +21,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.R
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
@@ -45,7 +47,7 @@ fun ErrorMessageComponent(
             tint = Orange
         )
         Spacer(modifier = Modifier.height(12.dp))
-        Text(text = "Algo deu errado")
+        Text(text = stringResource(id = R.string.error_component_message))
         Spacer(modifier = Modifier.height(16.dp))
         OutlinedButton(
             modifier = Modifier
@@ -56,7 +58,7 @@ fun ErrorMessageComponent(
             shape = RoundedCornerShape(32.dp)
         ) {
             Text(
-                text = "Tentar Novamente",
+                text = stringResource(id = R.string.error_component_button_text),
                 color = Orange
             )
         }
@@ -66,7 +68,7 @@ fun ErrorMessageComponent(
 @Preview
 @Composable
 fun ErrorMessageComponentPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         Box(modifier = Modifier
             .fillMaxSize()
             .background(Color.White)

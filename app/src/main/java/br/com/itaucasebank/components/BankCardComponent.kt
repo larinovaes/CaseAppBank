@@ -11,8 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Card
@@ -22,8 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Brown
@@ -59,10 +59,10 @@ private fun SessionNameUser(nameUser: String) {
         modifier = Modifier
             .padding(top = 24.dp, start = 24.dp)
     ) {
-        Text(
+        TextComponent(
             text = nameUser,
+            fontSize = 24.sp,
             color = Color.White,
-            style = MaterialTheme.typography.h6
         )
     }
 }
@@ -73,14 +73,16 @@ private fun SessionBalance(balanceValue: String) {
         modifier = Modifier
             .padding(top = 104.dp, start = 24.dp)
     ) {
-        Text(
+        TextComponent(
             text = stringResource(id = R.string.home_screen_text_balance),
             color = Color.White,
+            fontWeight = FontWeight.Medium,
         )
-        Text(
+        TextComponent(
             text = balanceValue,
             color = Color.White,
-            style = MaterialTheme.typography.h6
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Medium,
         )
     }
 }
@@ -91,11 +93,12 @@ private fun StatementButton(onClick: () -> Unit) {
         modifier = Modifier
             .padding(top = 180.dp, start = 24.dp),
     ) {
-        Text(
+        TextComponent(
             modifier = Modifier
                 .clickable { onClick() },
             text = stringResource(id = R.string.home_screen_text_statement_button),
             color = Color.White,
+            fontWeight = FontWeight.Medium,
         )
         Icon(
             imageVector = Icons.Default.KeyboardArrowRight,

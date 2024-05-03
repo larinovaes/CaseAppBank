@@ -1,5 +1,7 @@
 package br.com.itaucasebank.domain.mapper
 
+import br.com.itaucasebank.core.formatToDateTimePattern
+import br.com.itaucasebank.core.formatToCurrency
 import br.com.itaucasebank.data.remote.dto.AccountDetailsDto
 import br.com.itaucasebank.domain.model.AccountDetailsModel
 import br.com.itaucasebank.domain.model.PaymentModel
@@ -33,8 +35,8 @@ fun List<PaymentModel>.toConverter(): List<ExtractUIState> {
             id = it.id,
             name = it.name,
             category = it.category,
-            createdAt = it.createdAt,
-            amount = it.amount,
+            createdAt = it.createdAt.formatToDateTimePattern(),
+            amount = it.amount.formatToCurrency(),
         )
     }
     return extractUIState

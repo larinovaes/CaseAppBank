@@ -13,6 +13,11 @@
     <string name="login_screen_subtitle">Bem-vindo ao Itaú Transfer</string>
     <string name="login_screen_text_register">Não tem uma conta? </string>
     <string name="login_screen_button_register">Cadastre-se</string>
+    <string name="login_screen_message_error">Email or senha estão inválidos</string>
+    <string name="login_screen_label_password">Password</string>
+    <string name="login_screen_email_password">E-mail</string>
+    <string name="login_screen_show_password">Show password</string>
+    <string name="login_screen_hide_password">Hide password</string>
 
     <!-- Home Screen -->
     <string name="home_screen_text_statement_button">Ver Extrato</string>
@@ -22,7 +27,7 @@
     <string name="extract_screen_title_toolbar">Extrato</string>
     <string name="extract_screen_text_value">Valor</string>
     <string name="extract_screen_text_date_time">Data e Hora</string>
-    <string name="extract_screen_text_boleto">Pagamento Boleto</string>
+    <string name="extract_screen_text_none">Selecione forma de pagamento</string>
     <string name="extract_screen_text_pix">PIX</string>
     <string name="extract_screen_text_doc">DOC</string>
     <string name="extract_screen_text_ted">TED</string>
@@ -31,6 +36,24 @@
     <string name="transfer_area_screen_title_toolbar">Transferência</string>
     <string name="transfer_area_screen_title_account_session">Contatos recentes</string>
     <string name="transfer_area_screen_button_account_session">Add novo contato</string>
+    <string name="transfer_area_screen_select_bank">Selecione o Banco</string>
+    <string name="transfer_area_screen_input_account">Digite a conta</string>
+    <string name="transfer_area_screen_receipt_name">Nome do recebedor</string>
+    <string name="transfer_area_screen_receipt_cpf">CPF do recebedor</string>
+    <string name="transfer_area_screen_transfer_value">Valor da Transfência</string>
+    <string name="transfer_area_screen_transfer_type">Tipo de Transferência</string>
+    <string name="transfer_area_screen_message">Mensagem</string>
+    <string name="transfer_area_next_button">Próximo</string>
+    <string name="transfer_area_screen_title_transfer_type">Selecione o tipo de Transferência</string>
+    <string name="transfer_area_screen_save_contact">Salvar contato para novas transferências</string>
+
+    <!-- Transfer Confirmation Screen -->
+    <string name="transfer_confirmation_screen">Confirmar Transferência</string>
+
+    <!-- Transfer Receipt Screen -->
+    <string name="transfer_receipt_screen_message_success">Transferência concluída com sucesso!</string>
+    <string name="transfer_receipt_screen_button_text">Enviar Comprovante</string>
+    <string name="transfer_receipt_screen_toolbar_title">Comprovante</string>
 
     <!-- BankType -->
     <string name="bank_type_brazil">Banco do Brasil</string>
@@ -38,10 +61,27 @@
     <string name="bank_type_itau">Itaú Unibanco</string>
     <string name="bank_type_pan">Banco Pan</string>
     <string name="bank_type_original">Banco Original</string>
+    <string name="bank_type_none">Selecione o Banco</string>
 
     <!-- Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_search">Search</string>
     <string name="menu_email">Email</string>
     <string name="menu_settings">Settings</string>
+
+    <!-- Components -->
+    <string name="error_component_message">Algo deu errado</string>
+    <string name="error_component_button_text">Tentar Novamente</string>
+    <string name="dialog_button_text_twitter">Twitter</string>
+    <string name="dialog_button_text_facebook">Facebook</string>
+    <string name="dialog_button_text_reddit">Reddit</string>
+    <string name="dialog_button_text_whatsapp">WhatsApp</string>
+    <string name="title_section_text">Enviar Comprovante</string>
+    <string name="title_section_subtitle">Comparilhe esse comprovante</string>
+    <string name="transfer_details_name">Nome</string>
+    <string name="transfer_details_cpf">CPF</string>
+    <string name="transfer_details_agency">Agência</string>
+    <string name="transfer_details_account">Conta</string>
+    <string name="transfer_details_date">Data</string>
+    <string name="transfer_details_hour">Hora</string>
 </resources>

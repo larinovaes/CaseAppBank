@@ -5,7 +5,7 @@ import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
 
 @Composable
-fun ItaucasebankTheme(content: @Composable () -> Unit) {
+fun ItauCaseBankTheme(content: @Composable () -> Unit) {
 
     MaterialTheme(
         typography = Typography(),

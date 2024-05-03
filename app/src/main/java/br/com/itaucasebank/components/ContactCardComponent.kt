@@ -13,7 +13,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,7 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.presentation.uistate.ContactUIState
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import coil.compose.SubcomposeAsyncImage
 
 @Composable
@@ -48,7 +47,7 @@ fun ContactCardComponent(
         ) {
             Spacer(modifier = Modifier.height(16.dp))
             ContactPhoto(profileImageUrl = contacts.profileImageUrl)
-            Text(
+            TextComponent(
                 modifier = Modifier
                     .padding(vertical = 8.dp, horizontal = 16.dp),
                 text = contacts.name,
@@ -84,7 +83,7 @@ private fun ContactCardComponentPreview() {
             profileImageUrl = "https://media.licdn.com/dms/image/D4D03AQEIBryHBC4dKw/profile-displayphoto-shrink_400_400/0/1696031035294?e=1720051200&v=beta&t=fqLQ--hMjKeYcrIGUKn_TYmMsTbFh_eQcbugRY-cqos",
             name = "Maria"
         )
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         ContactCardComponent(
             contacts = contacts,
             onClick = {},

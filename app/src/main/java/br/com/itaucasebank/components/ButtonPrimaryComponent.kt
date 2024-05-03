@@ -10,7 +10,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.Icon
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -23,7 +22,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.itaucasebank.R
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
@@ -31,6 +30,7 @@ fun ButtonPrimaryComponent(
     text: String,
     modifier: Modifier = Modifier,
     roundedCornerSize: Dp = 32.dp,
+    isEnabled: Boolean = true,
     @DrawableRes icon: Int? = null,
     onClicked: () -> Unit
 ) {
@@ -43,6 +43,7 @@ fun ButtonPrimaryComponent(
                 .size(48.dp)
                 .clip(RoundedCornerShape(roundedCornerSize)),
             onClick = { onClicked() },
+            enabled = isEnabled,
             colors = ButtonDefaults.buttonColors(
                 backgroundColor = Orange,
             )
@@ -52,7 +53,7 @@ fun ButtonPrimaryComponent(
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.Center
             ) {
-                Text(
+                TextComponent(
                     text = text,
                     color = Color.White,
                     textAlign = TextAlign.Center,
@@ -74,7 +75,7 @@ fun ButtonPrimaryComponent(
 @Preview
 @Composable
 private fun ButtonPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         ButtonPrimaryComponent(
             text = "TEXT",
             icon = R.drawable.ic_arrow,

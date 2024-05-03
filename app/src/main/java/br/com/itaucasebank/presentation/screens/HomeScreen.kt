@@ -20,7 +20,6 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.runtime.Composable
@@ -30,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,15 +40,17 @@ import br.com.itaucasebank.components.BankCardComponent
 import br.com.itaucasebank.components.ErrorMessageComponent
 import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.components.MeuButtonComponent
+import br.com.itaucasebank.components.TextComponent
 import br.com.itaucasebank.enums.Menu
 import br.com.itaucasebank.enums.MenuCard
 import br.com.itaucasebank.presentation.viewmodel.HomeViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Cinza
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Pink
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -105,10 +107,10 @@ private fun HomeScreen(
             Column(
                 modifier = Modifier
                     .fillMaxHeight()
+                    .padding(vertical = 24.dp)
             ) {
                 Row(
                     modifier = Modifier
-                        .padding(vertical = 8.dp)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
@@ -148,7 +150,10 @@ private fun Profile(profileImageUrl: String) {
         elevation = 4.dp,
     ) {
         AsyncImage(
-            model = profileImageUrl,
+            model = ImageRequest.Builder(LocalContext.current)
+                .data(profileImageUrl)
+                .setHeader("User-Agent", "Mozilla/5.0")
+                .build(),
             contentDescription = null,
             contentScale = ContentScale.Crop,
             modifier = Modifier
@@ -178,7 +183,7 @@ private fun SectionNotification(
                 tint = Color.White,
             )
             if (isNotificationCountVisible) {
-                Text(
+                TextComponent(
                     text = notificationCount.toString(),
                     modifier = Modifier
                         .padding(start = 35.dp, top = 20.dp)
@@ -203,12 +208,12 @@ private fun UserInformationSection(
     Column(
         modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp),
     ) {
-        Text(
+        TextComponent(
             text = "Olá, $userName",
             color = Color.White,
             minLines = 1,
         )
-        Text(
+        TextComponent(
             text = "Ag. $agencyNumber, CC $accountNumber",
             color = Color.White,
             minLines = 1,
@@ -302,7 +307,7 @@ private fun MenuItem(
                 contentDescription = null,
                 tint = Color.White,
             )
-            Text(
+            TextComponent(
                 text = stringResource(id = menu.description),
                 fontSize = 12.sp,
                 color = Color.White,
@@ -321,7 +326,7 @@ private fun MenuItem(
 @Preview
 @Composable
 private fun HomePreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         HomeScreen(
             profileImageUrl = "",
             userName = "Carlos Daniel",

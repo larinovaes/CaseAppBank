@@ -2,6 +2,8 @@ package br.com.itaucasebank.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import br.com.itaucasebank.core.formatToAccountNumber
+import br.com.itaucasebank.core.formatToCurrency
 import br.com.itaucasebank.domain.model.UserAndAccountDetailsModel
 import br.com.itaucasebank.domain.usecase.GetUserAndAccountDetailsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,9 +33,9 @@ class HomeViewModel(
             it.copy(
                 userName = userAndAccountDetailsModel.userName,
                 profileImageUrl = userAndAccountDetailsModel.profileImageUrl,
-                accountNumber = userAndAccountDetailsModel.accountNumber,
+                accountNumber = userAndAccountDetailsModel.accountNumber.formatToAccountNumber(),
                 agencyNumber = userAndAccountDetailsModel.agencyNumber,
-                balanceValue = userAndAccountDetailsModel.balanceValue,
+                balanceValue = userAndAccountDetailsModel.balanceValue.formatToCurrency(),
                 isLoading = false,
                 isError = false,
             )

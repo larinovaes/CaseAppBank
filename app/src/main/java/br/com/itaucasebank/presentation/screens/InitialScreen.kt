@@ -1,8 +1,10 @@
 package br.com.itaucasebank.presentation.screens
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,24 +12,30 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
+import br.com.itaucasebank.components.TextComponent
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
-import br.com.itaucasebank.ui.theme.ItaucasebankTheme
+import br.com.itaucasebank.ui.theme.Brown
+import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.LightGray
+import br.com.itaucasebank.ui.theme.Orange
 
 @Composable
 fun InitialScreen(
@@ -42,30 +50,53 @@ fun InitialScreen(
 private fun InitialScreen(
     onButtonAccessClicked: () -> Unit,
 ) {
-    Column(
+    Box(modifier = Modifier.fillMaxSize()) {
+        CircleComponent()
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = 280.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            InitialTitle()
+            Spacer(modifier = Modifier.height(34.dp))
+            InitialContent()
+            Spacer(modifier = Modifier.height(24.dp))
+            ButtonPrimaryComponent(
+                text = stringResource(id = R.string.init_screen_button),
+                modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
+                icon = R.drawable.ic_arrow,
+                onClicked = onButtonAccessClicked
+            )
+        }
+    }
+}
+
+@Composable
+private fun CircleComponent() {
+    Canvas(
         modifier = Modifier
             .fillMaxSize()
-            .background(Blue)
-            .padding(top = 280.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .background(Blue),
     ) {
-        InitialTitle()
-        Spacer(modifier = Modifier.height(34.dp))
-        InitialContent()
-        Spacer(modifier = Modifier.height(24.dp))
-        ButtonPrimaryComponent(
-            text = stringResource(id = R.string.init_screen_button),
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
-            icon = R.drawable.ic_arrow,
-            onClicked = onButtonAccessClicked
+        drawCircle(
+            color = Brown,
+            center = Offset(x = size.width * 0.0f, y = size.height * 0.3f),
+            radius = size.minDimension * 0.3f,
+        )
+
+        drawCircle(
+            color = Orange,
+            center = Offset(x = size.width * 0.8f, y = size.height * 0.1f),
+            radius = size.minDimension * 0.54f,
         )
     }
-
 }
 
 @Composable
 private fun InitialTitle() {
+    val fontFamily = FontFamily(Font(R.font.archivo_narrow_regular, FontWeight.Normal))
     Column(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -75,9 +106,10 @@ private fun InitialTitle() {
             Modifier.size(110.dp)
         )
         Spacer(modifier = Modifier.height(18.dp))
-        Text(
+        TextComponent(
+            fontFamily = fontFamily,
             text = stringResource(id = R.string.init_screen_title),
-            style = MaterialTheme.typography.h5,
+            fontSize = 24.sp,
             color = MaterialTheme.colors.onPrimary,
         )
     }
@@ -85,18 +117,19 @@ private fun InitialTitle() {
 
 @Composable
 private fun InitialContent() {
-    Text(
+    TextComponent(
         text = stringResource(id = R.string.init_screen_subtitle),
-        style = MaterialTheme.typography.h5,
         color = MaterialTheme.colors.onPrimary,
         fontWeight = FontWeight.Bold,
+        fontSize = 24.sp
     )
     Spacer(modifier = Modifier.height(34.dp))
 
-    Text(
+    TextComponent(
         text = stringResource(id = R.string.init_screen_text),
         color = LightGray,
         textAlign = TextAlign.Center,
+        fontSize = 14.sp,
         modifier = Modifier.padding(horizontal = 24.dp),
     )
 }
@@ -104,7 +137,7 @@ private fun InitialContent() {
 @Preview
 @Composable
 private fun SplashScreenPreview() {
-    ItaucasebankTheme {
+    ItauCaseBankTheme {
         InitialScreen()
     }
 }

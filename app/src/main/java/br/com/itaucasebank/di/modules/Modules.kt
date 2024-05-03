@@ -12,6 +12,8 @@ import br.com.itaucasebank.domain.usecase.GetUserAndAccountDetailsUseCase
 import br.com.itaucasebank.presentation.viewmodel.ExtractViewModel
 import br.com.itaucasebank.presentation.viewmodel.HomeViewModel
 import br.com.itaucasebank.presentation.viewmodel.LoginViewModel
+import br.com.itaucasebank.presentation.viewmodel.TransferSharedViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -20,6 +22,7 @@ private val appModule = module {
     viewModel { LoginViewModel(get()) }
     viewModel { HomeViewModel(get()) }
     viewModel { ExtractViewModel(get()) }
+    viewModel { TransferSharedViewModel(androidApplication()) }
 }
 
 private val domainModule = module {
