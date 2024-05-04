@@ -34,8 +34,8 @@ import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Brown
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.LightGray
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.GrayLight
+import br.com.itaucasebank.ui.theme.OrangePrimary
 
 @Composable
 fun InitialScreen(
@@ -87,7 +87,7 @@ private fun CircleComponent() {
         )
 
         drawCircle(
-            color = Orange,
+            color = OrangePrimary,
             center = Offset(x = size.width * 0.8f, y = size.height * 0.1f),
             radius = size.minDimension * 0.54f,
         )
@@ -127,7 +127,7 @@ private fun InitialContent() {
 
     TextComponent(
         text = stringResource(id = R.string.init_screen_text),
-        color = LightGray,
+        color = GrayLight,
         textAlign = TextAlign.Center,
         fontSize = 14.sp,
         modifier = Modifier.padding(horizontal = 24.dp),

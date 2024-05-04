@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.enums.MenuCard
-import br.com.itaucasebank.ui.theme.IntenseOrange
+import br.com.itaucasebank.ui.theme.OrangeSecondary
 
 @Composable
 fun MeuButtonComponent(
@@ -35,7 +35,7 @@ fun MeuButtonComponent(
     ) {
         Column(
             modifier = Modifier
-                .background(IntenseOrange)
+                .background(OrangeSecondary)
         ) {
             Icon(
                 modifier = Modifier

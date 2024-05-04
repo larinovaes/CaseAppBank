@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 
 @Composable
 fun ButtonPrimaryComponent(
@@ -45,7 +45,7 @@ fun ButtonPrimaryComponent(
             onClick = { onClicked() },
             enabled = isEnabled,
             colors = ButtonDefaults.buttonColors(
-                backgroundColor = Orange,
+                backgroundColor = OrangePrimary,
             )
         ) {
             Row(

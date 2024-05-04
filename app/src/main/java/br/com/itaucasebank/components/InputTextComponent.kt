@@ -25,11 +25,11 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import br.com.itaucasebank.ui.theme.Cinza
-import br.com.itaucasebank.ui.theme.Cinza2
-import br.com.itaucasebank.ui.theme.Cinza3
+import br.com.itaucasebank.ui.theme.GrayPrimary
+import br.com.itaucasebank.ui.theme.GraySecondary
+import br.com.itaucasebank.ui.theme.GrayTertiary
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 
 @Composable
 fun InputTextComponent(
@@ -47,7 +47,7 @@ fun InputTextComponent(
     ) {
         Text(
             text = title,
-            color = Cinza2,
+            color = GraySecondary,
             fontWeight = FontWeight.SemiBold,
             fontSize = 12.sp,
         )
@@ -64,10 +64,10 @@ fun InputTextComponent(
             keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation,
             colors = TextFieldDefaults.outlinedTextFieldColors(
-                unfocusedBorderColor = Cinza3,
-                focusedBorderColor = Orange,
+                unfocusedBorderColor = GrayTertiary,
+                focusedBorderColor = OrangePrimary,
                 disabledTextColor = MaterialTheme.colorScheme.onSurface,
-                disabledBorderColor = Cinza3,
+                disabledBorderColor = GrayTertiary,
                 disabledPlaceholderColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 disabledLabelColor = MaterialTheme.colorScheme.onSurfaceVariant,
                 //For Icons
@@ -80,7 +80,7 @@ fun InputTextComponent(
                     Icon(
                         imageVector = Icons.Default.KeyboardArrowRight,
                         contentDescription = null,
-                        tint = Cinza,
+                        tint = GrayPrimary,
                     )
                 }
             }

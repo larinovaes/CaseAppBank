@@ -72,6 +72,8 @@
     <!-- Components -->
     <string name="error_component_message">Algo deu errado</string>
     <string name="error_component_button_text">Tentar Novamente</string>
+    <string name="extract_empty_state_component_title">Sem Resultados</string>
+    <string name="extract_empty_state_component_message">Desculpa, não encontramos nenhum extrato.\nPor favor, tente novamente mais tarde.</string>
     <string name="dialog_button_text_twitter">Twitter</string>
     <string name="dialog_button_text_facebook">Facebook</string>
     <string name="dialog_button_text_reddit">Reddit</string>

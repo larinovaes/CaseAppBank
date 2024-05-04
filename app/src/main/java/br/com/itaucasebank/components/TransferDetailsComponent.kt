@@ -25,8 +25,8 @@ import br.com.itaucasebank.R
 import br.com.itaucasebank.core.formatToAccountNumberComponent
 import br.com.itaucasebank.core.formatToCurrency
 import br.com.itaucasebank.presentation.uistate.TransferDetailsUIState
-import br.com.itaucasebank.ui.theme.Cinza2
-import br.com.itaucasebank.ui.theme.Cinza3
+import br.com.itaucasebank.ui.theme.GraySecondary
+import br.com.itaucasebank.ui.theme.GrayTertiary
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Pink
 
@@ -104,7 +104,7 @@ fun DrawDashLine(
         modifier.fillMaxWidth()
     ) {
         drawLine(
-            color = Cinza3,
+            color = GrayTertiary,
             strokeWidth = 5f,
             start = Offset(20f, 0f),
             end = Offset(size.width - 20, 0f),
@@ -126,7 +126,7 @@ private fun DetailsRow(
             text = title,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold,
-            color = Cinza2,
+            color = GraySecondary,
         )
         Spacer(modifier = Modifier.weight(1F))
         TextComponent(

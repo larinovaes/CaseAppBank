@@ -46,7 +46,7 @@ import br.com.itaucasebank.enums.MenuCard
 import br.com.itaucasebank.presentation.viewmodel.HomeViewModel
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
-import br.com.itaucasebank.ui.theme.Cinza
+import br.com.itaucasebank.ui.theme.GrayPrimary
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
 import br.com.itaucasebank.ui.theme.Pink
 import coil.compose.AsyncImage
@@ -318,7 +318,7 @@ private fun MenuItem(
             modifier = Modifier.padding(24.dp),
             painter = painterResource(id = menu.icon),
             contentDescription = null,
-            tint = Cinza,
+            tint = GrayPrimary,
         )
     }
 }

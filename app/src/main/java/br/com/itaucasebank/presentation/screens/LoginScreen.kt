@@ -50,7 +50,7 @@ import br.com.itaucasebank.ui.theme.Black
 import br.com.itaucasebank.ui.theme.ColorDivider
 import br.com.itaucasebank.ui.theme.ColorInput
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -201,10 +201,10 @@ private fun EmailTextField(
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
-            focusedIndicatorColor = Orange,
+            focusedIndicatorColor = OrangePrimary,
             unfocusedIndicatorColor = ColorInput,
             cursorColor = ColorInput,
-            focusedLabelColor = Orange,
+            focusedLabelColor = OrangePrimary,
         ),
         leadingIcon = {
             Icon(
@@ -235,10 +235,10 @@ private fun PasswordTextField(
         shape = RoundedCornerShape(20.dp),
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.Transparent,
-            focusedIndicatorColor = Orange,
+            focusedIndicatorColor = OrangePrimary,
             unfocusedIndicatorColor = ColorInput,
             cursorColor = ColorInput,
-            focusedLabelColor = Orange,
+            focusedLabelColor = OrangePrimary,
         ),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
         leadingIcon = {

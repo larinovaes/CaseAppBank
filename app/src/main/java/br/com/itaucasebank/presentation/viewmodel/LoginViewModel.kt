@@ -52,7 +52,5 @@ class LoginViewModel(
 
     sealed class UiEvent {
         data object NavigateToHome: UiEvent()
-
-        data object ShowToastError: UiEvent()
     }
 }

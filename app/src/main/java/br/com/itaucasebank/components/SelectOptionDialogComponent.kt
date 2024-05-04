@@ -28,10 +28,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
-import br.com.itaucasebank.ui.theme.Cinza
-import br.com.itaucasebank.ui.theme.Cinza2
+import br.com.itaucasebank.ui.theme.GrayPrimary
+import br.com.itaucasebank.ui.theme.GraySecondary
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Purple40
+import br.com.itaucasebank.ui.theme.PurplePrimary
 
 data class SelectOptionUiState(
     val id: String,
@@ -102,7 +102,7 @@ private fun TopSection(
             Icon(
                 imageVector = Icons.Default.Close,
                 contentDescription = null,
-                tint = Cinza,
+                tint = GrayPrimary,
             )
         }
     }
@@ -114,7 +114,7 @@ private fun OptionItem(
     isSelected: Boolean,
     onClick: () -> Unit,
 ) {
-    val textColor = if (isSelected) Purple40 else Cinza2
+    val textColor = if (isSelected) PurplePrimary else GraySecondary
     Row(
         modifier = Modifier
             .clickable { onClick() }
@@ -132,7 +132,7 @@ private fun OptionItem(
             Icon(
                 imageVector = Icons.Default.Check,
                 contentDescription = null,
-                tint = Purple40,
+                tint = PurplePrimary,
             )
         }
     }

@@ -29,7 +29,7 @@ import br.com.itaucasebank.R
 import br.com.itaucasebank.router.Route
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 import kotlinx.coroutines.delay
 
 @Composable
@@ -55,7 +55,7 @@ fun SplashScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            CircularProgressIndicator(color = Orange)
+            CircularProgressIndicator(color = OrangePrimary)
 
             Spacer(modifier = Modifier.height(8.dp))
 

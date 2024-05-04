@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.ui.theme.Blue
 import br.com.itaucasebank.ui.theme.Brown
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 
 @Composable
 fun BankCardComponent(
@@ -43,7 +43,7 @@ fun BankCardComponent(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         Box {
-            BankCardBackground(baseColor = Orange)
+            BankCardBackground(baseColor = OrangePrimary)
             SessionNameUser(nameUser = nameUser)
             StatementButton(accountStatementButton)
             SessionBalance(

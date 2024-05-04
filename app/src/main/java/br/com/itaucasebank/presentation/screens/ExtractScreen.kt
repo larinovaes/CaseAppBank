@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ErrorMessageComponent
 import br.com.itaucasebank.components.ExtractComponent
+import br.com.itaucasebank.components.ExtractEmptyStateComponent
 import br.com.itaucasebank.components.LoadingComponent
 import br.com.itaucasebank.components.ToolbarComponent
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
@@ -61,8 +62,8 @@ private fun ExtractScreen(
 
         if (isLoading) LoadingComponent()
         else if (isError) ErrorMessageComponent(onClick = onClickRetry)
+        else if (extract.isEmpty()) ExtractEmptyStateComponent()
         else SectionExtract(extractUIState = extract)
-
     }
 }
 

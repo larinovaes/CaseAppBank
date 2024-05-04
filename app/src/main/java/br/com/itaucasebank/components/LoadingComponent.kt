@@ -13,7 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Orange
+import br.com.itaucasebank.ui.theme.OrangePrimary
 
 @Composable
 fun LoadingComponent(
@@ -34,7 +34,7 @@ fun LoadingComponent(
                 .background(Color.Black.copy(alpha = alpha)),
             contentAlignment = Alignment.Center
         ) {
-            CircularProgressIndicator(color = Orange)
+            CircularProgressIndicator(color = OrangePrimary)
         }
 
 }

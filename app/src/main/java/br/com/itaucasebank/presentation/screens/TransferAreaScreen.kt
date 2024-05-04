@@ -54,9 +54,9 @@ import br.com.itaucasebank.enums.TransactionType
 import br.com.itaucasebank.presentation.uistate.ContactUIState
 import br.com.itaucasebank.presentation.viewmodel.TransferSharedViewModel
 import br.com.itaucasebank.router.Route
-import br.com.itaucasebank.ui.theme.Cinza
+import br.com.itaucasebank.ui.theme.GrayPrimary
 import br.com.itaucasebank.ui.theme.ItauCaseBankTheme
-import br.com.itaucasebank.ui.theme.Purple40
+import br.com.itaucasebank.ui.theme.PurplePrimary
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -212,7 +212,7 @@ private fun AccountSection(
         TextComponent(
             modifier = Modifier.weight(1f),
             text = stringResource(id = R.string.transfer_area_screen_title_account_session),
-            color = Cinza,
+            color = GrayPrimary,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -220,7 +220,7 @@ private fun AccountSection(
             modifier = Modifier
                 .clickable { onClick() },
             text = stringResource(id = R.string.transfer_area_screen_button_account_session),
-            color = Purple40,
+            color = PurplePrimary,
             fontSize = 12.sp,
             fontWeight = FontWeight.SemiBold
         )
@@ -414,7 +414,7 @@ private fun SaveContactCheckBox(
                 checked = isSaveContactChecked,
                 onCheckedChange = onSaveContactCheckedChange,
                 colors = CheckboxDefaults.colors(
-                    checkedColor = Purple40,
+                    checkedColor = PurplePrimary,
                 )
             )
         }
@@ -423,7 +423,7 @@ private fun SaveContactCheckBox(
             text = stringResource(id = R.string.transfer_area_screen_save_contact),
             fontSize = 14.sp,
             fontWeight = FontWeight.Medium,
-            color = Purple40,
+            color = PurplePrimary,
         )
     }
 }

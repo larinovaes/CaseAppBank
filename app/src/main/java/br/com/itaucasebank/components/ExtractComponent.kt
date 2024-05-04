@@ -18,8 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.itaucasebank.R
 import br.com.itaucasebank.presentation.uistate.ExtractUIState
-import br.com.itaucasebank.ui.theme.Cinza2
-import br.com.itaucasebank.ui.theme.Purple40
+import br.com.itaucasebank.ui.theme.GraySecondary
+import br.com.itaucasebank.ui.theme.PurplePrimary
 
 @Composable
 fun ExtractComponent(
@@ -67,12 +67,12 @@ fun ExtractComponent(
                 TextComponent(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = R.string.extract_screen_text_value),
-                    color = Cinza2,
+                    color = GraySecondary,
                     fontSize = 12.sp
                 )
                 TextComponent(
                     text = extractUIState.amount,
-                    color = Purple40,
+                    color = PurplePrimary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
                     maxLines = 1
@@ -87,12 +87,12 @@ fun ExtractComponent(
                 TextComponent(
                     modifier = Modifier.weight(1f),
                     text = stringResource(id = R.string.extract_screen_text_date_time),
-                    color = Cinza2,
+                    color = GraySecondary,
                     fontSize = 12.sp
                 )
                 TextComponent(
                     text = extractUIState.createdAt,
-                    color = Purple40,
+                    color = PurplePrimary,
                     fontWeight = FontWeight.Bold,
                     fontSize = 12.sp,
                     maxLines = 1
