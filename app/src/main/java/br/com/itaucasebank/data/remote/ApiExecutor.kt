@@ -1,4 +1,4 @@
-package br.com.itaucasebank.data.infrastructure
+package br.com.itaucasebank.data.remote
 
 import retrofit2.Response
 

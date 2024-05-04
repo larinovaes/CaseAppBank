@@ -6,7 +6,6 @@ import androidx.compose.runtime.Composable
 
 @Composable
 fun ItauCaseBankTheme(content: @Composable () -> Unit) {
-
     MaterialTheme(
         typography = Typography(),
         shapes = Shapes,

@@ -1,6 +1,6 @@
 package br.com.itaucasebank.data.repository
 
-import br.com.itaucasebank.data.infrastructure.ApiExecutor
+import br.com.itaucasebank.data.remote.ApiExecutor
 import br.com.itaucasebank.data.local.dao.UserDao
 import br.com.itaucasebank.data.remote.api.AppApi
 import br.com.itaucasebank.domain.mapper.toUserEntity

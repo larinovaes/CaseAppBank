@@ -2,7 +2,10 @@ package br.com.itaucasebank.presentation.viewmodel
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
+import br.com.itaucasebank.ui.transformations.MaskType
+import br.com.itaucasebank.core.formatToCurrency
 import br.com.itaucasebank.core.formatToHour
+import br.com.itaucasebank.core.formatToMask
 import br.com.itaucasebank.core.formatToSimpleDate
 import br.com.itaucasebank.enums.BankType
 import br.com.itaucasebank.enums.TransactionType
@@ -29,10 +32,10 @@ class TransferSharedViewModel(
         _transferDetailsUiState.update {
             it.copy(
                 name = _transferAreaUiState.value.recipientName,
-                cpf = _transferAreaUiState.value.recipientCpf,
+                cpf = _transferAreaUiState.value.recipientCpf.formatToMask(MaskType.CPF_MASK),
                 accountNumber = _transferAreaUiState.value.account,
                 agency = agency,
-                transferValue = _transferAreaUiState.value.transferValue,
+                transferValue = _transferAreaUiState.value.transferValue.formatToCurrency(),
                 date = Date().formatToSimpleDate(),
                 hour = Date().formatToHour()
             )
@@ -113,6 +116,5 @@ class TransferSharedViewModel(
                 )
             }
         }
-
     }
 }

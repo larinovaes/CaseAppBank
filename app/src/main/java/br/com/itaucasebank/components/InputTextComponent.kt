@@ -9,12 +9,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -36,6 +37,8 @@ fun InputTextComponent(
     text: String,
     modifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    maxLength: Int = Int.MAX_VALUE,
     onValueChange: (String) -> Unit = {},
     onClick: (() -> Unit)? = null
 ) {
@@ -54,10 +57,13 @@ fun InputTextComponent(
                 .fillMaxWidth()
                 .clickable { onClick?.invoke() },
             value = text,
-            onValueChange = onValueChange,
+            onValueChange = {
+                if (it.length <= maxLength) onValueChange(it)
+            },
             shape = RoundedCornerShape(16.dp),
+            keyboardOptions = keyboardOptions,
             visualTransformation = visualTransformation,
-            colors = OutlinedTextFieldDefaults.colors(
+            colors = TextFieldDefaults.outlinedTextFieldColors(
                 unfocusedBorderColor = Cinza3,
                 focusedBorderColor = Orange,
                 disabledTextColor = MaterialTheme.colorScheme.onSurface,

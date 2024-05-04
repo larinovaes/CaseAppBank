@@ -3,7 +3,6 @@ package br.com.itaucasebank.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import br.com.itaucasebank.data.remote.dto.UserDto
 
 @Entity(tableName = "user")
 data class UserEntity(
@@ -23,14 +22,4 @@ data class UserEntity(
 
     @ColumnInfo(name = "password")
     val password: String
-) {
-
-    constructor(userDto: UserDto) : this(
-        id = userDto.id,
-        name = userDto.name,
-        avatar = userDto.avatar,
-        createdAt = userDto.createdAt,
-        email = userDto.email,
-        password = userDto.password,
-    )
-}
+)

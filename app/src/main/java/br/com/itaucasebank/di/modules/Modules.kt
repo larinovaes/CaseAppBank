@@ -1,6 +1,6 @@
 package br.com.itaucasebank.di.modules
 
-import br.com.itaucasebank.data.infrastructure.ApiExecutor
+import br.com.itaucasebank.data.remote.ApiExecutor
 import br.com.itaucasebank.data.local.AppDatabase
 import br.com.itaucasebank.data.repository.AppRepository
 import br.com.itaucasebank.di.provider.ApiProvider

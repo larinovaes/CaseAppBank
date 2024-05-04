@@ -14,6 +14,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.material.Checkbox
@@ -31,19 +32,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.text.isDigitsOnly
 import androidx.navigation.NavController
 import br.com.itaucasebank.R
 import br.com.itaucasebank.components.ButtonPrimaryComponent
 import br.com.itaucasebank.components.ContactCardComponent
+import br.com.itaucasebank.ui.transformations.CurrencyTransformation
 import br.com.itaucasebank.components.InputTextComponent
+import br.com.itaucasebank.ui.transformations.MaskTransformation
+import br.com.itaucasebank.ui.transformations.MaskType
 import br.com.itaucasebank.components.SelectOptionDialogComponent
 import br.com.itaucasebank.components.SelectOptionUiState
 import br.com.itaucasebank.components.TextComponent
 import br.com.itaucasebank.components.ToolbarComponent
-import br.com.itaucasebank.core.formatCPF
 import br.com.itaucasebank.enums.BankType
 import br.com.itaucasebank.enums.TransactionType
 import br.com.itaucasebank.presentation.uistate.ContactUIState
@@ -64,7 +69,7 @@ fun TransferAreaScreen(
         contactUIStates = uiState.value.contactUiStates,
         accountInputTextValue = uiState.value.account,
         recipientInputTextValue = uiState.value.recipientName,
-        recipientCpfInputTextValue = uiState.value.recipientCpf.formatCPF(),
+        recipientCpfInputTextValue = uiState.value.recipientCpf,
         transferValueInputTextValue = uiState.value.transferValue,
         messageInputTextValue = uiState.value.message,
         selectedBankType = uiState.value.selectedBankType,
@@ -263,7 +268,16 @@ private fun InputTextSection(
             InputTextComponent(
                 title = stringResource(id = R.string.transfer_area_screen_input_account),
                 text = accountInputTextValue,
-                onValueChange = onAccountInputTextValueChanged,
+                maxLength = 6,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                visualTransformation = MaskTransformation(MaskType.ACCOUNT_NUMBER_MASK),
+                onValueChange = {
+                    if (it.isDigitsOnly()) {
+                        onAccountInputTextValueChanged.invoke(it)
+                    }
+                },
             )
             Spacer(modifier = Modifier.height(24.dp))
             InputTextComponent(
@@ -276,13 +290,31 @@ private fun InputTextSection(
             InputTextComponent(
                 title = stringResource(id = R.string.transfer_area_screen_receipt_cpf),
                 text = recipientCpfInputTextValue,
-                onValueChange =  onRecipientCpfInputTextValueChanged,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                maxLength = 11,
+                visualTransformation = MaskTransformation(MaskType.CPF_MASK),
+                onValueChange = {
+                    if (it.isDigitsOnly()) {
+                        onRecipientCpfInputTextValueChanged.invoke(it)
+                    }
+                },
             )
             Spacer(modifier = Modifier.height(24.dp))
             InputTextComponent(
+                visualTransformation = CurrencyTransformation(),
                 title = stringResource(id = R.string.transfer_area_screen_transfer_value),
                 text = transferValueInputTextValue,
-                onValueChange = transferValueInputTextValueChanged,
+                keyboardOptions = KeyboardOptions.Default.copy(
+                    keyboardType = KeyboardType.Number,
+                ),
+                maxLength = 7,
+                onValueChange = {
+                    if (it.isDigitsOnly()) {
+                        transferValueInputTextValueChanged.invoke(it)
+                    }
+                },
             )
             Spacer(modifier = Modifier.height(24.dp))
             InputTextComponent(

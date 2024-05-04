@@ -1,14 +1,12 @@
 package br.com.itaucasebank.presentation
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -17,6 +15,7 @@ import br.com.itaucasebank.presentation.screens.ExtractScreen
 import br.com.itaucasebank.presentation.screens.HomeScreen
 import br.com.itaucasebank.presentation.screens.InitialScreen
 import br.com.itaucasebank.presentation.screens.LoginScreen
+import br.com.itaucasebank.presentation.screens.SplashScreen
 import br.com.itaucasebank.presentation.screens.TransferAreaScreen
 import br.com.itaucasebank.presentation.screens.TransferConfirmationScreen
 import br.com.itaucasebank.presentation.screens.TransferReceiptScreen
@@ -28,28 +27,27 @@ import org.koin.android.ext.android.get
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupTransparentStatusBar()
+
         val sharedViewModel: TransferSharedViewModel = get()
-        window.statusBarColor = Color.Transparent.toArgb()
-        window.decorView.systemUiVisibility = (
-                window.decorView.systemUiVisibility or
-                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
-                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                )
         setContent {
             ItauCaseBankTheme {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = Route.INITIAL.name
+                    startDestination = Route.SPLASH.name
                 ) {
+                    composable(Route.SPLASH.name) {
+                        SplashScreen(navController = navController)
+                    }
                     composable(Route.INITIAL.name) {
-                        InitialScreen(navController)
+                        InitialScreen(navController = navController)
                     }
                     composable(Route.LOGIN.name) {
-                        LoginScreen(navController)
+                        LoginScreen(navController = navController)
                     }
                     composable(Route.HOME.name) {
-                        HomeScreen(navController)
+                        HomeScreen(navController = navController)
                     }
                     composable(Route.EXTRACT.name) {
                         ExtractScreen(navController = navController)
@@ -68,19 +66,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun Greeting(name: String, modifier: Modifier = Modifier) {
-        Text(
-            text = "Hello $name!",
-            modifier = modifier
-        )
+    private fun Activity.setupTransparentStatusBar() {
+        window.apply {
+            // Define a cor da barra de status como transparente
+            statusBarColor = android.graphics.Color.TRANSPARENT
+            // Configura as flags do sistema UI para que o conteúdo seja renderizado abaixo da barra de status
+            decorView.systemUiVisibility = (
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    )
+        }
     }
 
     @Preview(showBackground = true)
     @Composable
     fun GreetingPreview() {
         ItauCaseBankTheme {
-            Greeting("Android")
+            Text(text = "Bem vindo")
         }
     }
 }
