@@ -1,13 +1,12 @@
 package br.com.itaucasebank.domain.usecase
 
-import android.util.Patterns
 import br.com.itaucasebank.data.repository.AppRepository
 import br.com.itaucasebank.domain.exception.InvalidEmailOrPasswordException
 
 class AuthenticateUserUseCase(private val appRepository: AppRepository) {
 
     suspend fun execute(email: String, password: String): Result<Unit> {
-        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        if (!isEmailValid(email)) {
             return Result.failure(InvalidEmailOrPasswordException())
         }
         if (!isPasswordValid(password)){
@@ -43,5 +42,10 @@ class AuthenticateUserUseCase(private val appRepository: AppRepository) {
         val digitRegex = Regex("\\d{5,}")
 
         return uppercaseRegex.containsMatchIn(password) && digitRegex.containsMatchIn(password)
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        val emailRegex = Regex("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")
+        return emailRegex.matches(email)
     }
 }
