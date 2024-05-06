@@ -51,34 +51,32 @@ android {
 }
 
 dependencies {
-    val composeVersion = "1.5.4"
-    val retrofitVersion = "2.9.0"
-    val roomVersion = "2.6.1"
+    implementation(Dependencies.DI.KOIN)
 
-    implementation("io.coil-kt:coil-compose:2.6.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation("androidx.compose.ui:ui:$composeVersion")
-    implementation("androidx.navigation:navigation-compose:2.7.6")
-    implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
-    implementation("androidx.compose.material:material:$composeVersion")
-    implementation("io.insert-koin:koin-androidx-compose:3.5.0")
-    debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
+    implementation(Dependencies.AndroidX.LIFECYCLE_RUNTIME_KTX)
+    implementation(Dependencies.AndroidX.COMPOSE_ACTIVITY)
+    implementation(Dependencies.AndroidX.COMPOSE_TOLLING_PREVIEW)
+    implementation(Dependencies.AndroidX.COMPOSE_NAVIGATION)
+    debugImplementation(Dependencies.AndroidX.COMPOSE_UI_TOLLING)
+    debugImplementation(Dependencies.AndroidX.COMPOSE_UI_TEST_MANIFEST)
+    implementation(Dependencies.AndroidX.CORE_KTX)
+    implementation(Dependencies.AndroidX.APP_COMPAT)
 
-    implementation ("androidx.compose.material3:material3:1.1.0")
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-moshi:$retrofitVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("com.squareup.moshi:moshi-kotlin:1.13.0")
-    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
-//    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    implementation(Dependencies.UI.COIL_KTX)
+    implementation(Dependencies.UI.COMPOSE_UI)
+    implementation(Dependencies.UI.COMPOSE_MATERIAL_DESIGN)
+    implementation (Dependencies.UI.COMPOSE_MATERIAL)
+
+    implementation(Dependencies.DataSource.RETROFIT)
+    implementation(Dependencies.DataSource.RETROFIT_CONVERTER)
+    implementation(Dependencies.DataSource.ROOM)
+    kapt(Dependencies.DataSource.ROOM_COMPILER)
+    implementation(Dependencies.DataSource.MOSHI_KOTLIN)
+
+    implementation(Dependencies.NETWORK.OKHTTP)
+
+    testImplementation(Dependencies.UnitTest.JUNIT)
+    testImplementation(Dependencies.UnitTest.MOCKK)
+    testImplementation(Dependencies.UnitTest.COROUTINES_TEST)
+    testImplementation(Dependencies.UnitTest.CORE_TESTING)
 }
